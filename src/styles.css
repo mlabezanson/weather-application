@@ -107,7 +107,7 @@ row {
 }
 
 .weather-app-body {
-  background-image: url("C:/Users/miche/Code/SheCodesPlusProject/images/weatherappbackground.jpg");
+  background-image: url("images/weatherappbackground.jpg");
   background-size: 100%;
   border: 1px solid #000;
   border-radius: 10px;
