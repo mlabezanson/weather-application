@@ -113,7 +113,7 @@ row {
 }
 
 .weather-app-body {
-  background-image: url("https://github.com/mlabezanson/weather-application/blob/main/images/weatherappbackground.jpg");
+  background-image: url("https://s3.amazonaws.com/shecodesio-production/uploads/files/000/046/230/original/weatherappbackground.jpg?1663225578");
   background-size: 100%;
   border: 1px solid #000;
   border-radius: 10px;
