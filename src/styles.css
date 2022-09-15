@@ -82,6 +82,12 @@ row {
   font-family: "Poppins", sans-serif;
 }
 
+.open-sourced {
+  font-family: "Poppins", sans-serif;
+  font-size: 11px;
+  padding-left: 167px;
+}
+
 .precipitation {
   margin-top: 20%;
 }
@@ -111,7 +117,7 @@ row {
   background-size: 100%;
   border: 1px solid #000;
   border-radius: 10px;
-  margin: 50px auto;
+  margin: 50px auto 5px;
   padding: 20px;
   max-width: 70%;
 }
