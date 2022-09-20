@@ -46,6 +46,17 @@ row {
   color: #2b4060;
   margin-bottom: 0;
 }
+
+h2 .active {
+  color: #2b4060;
+  cursor: default;
+  text-decoration: none;
+}
+
+h2 .active:hover {
+  text-decoration: none;
+}
+
 .day {
   font-weight: bold;
   font-family: "Poppins", sans-serif;

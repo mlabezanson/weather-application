@@ -218,50 +218,30 @@ citySearchForm.addEventListener("submit", newCitySearch);
 // Code to switch between temperature units
 // Cannot get the units to switch back from F to C!!!
 
-function switchUnit(event) {
+function switchUnitToFahrenheit(event) {
   event.preventDefault();
-  let primaryUnit = document.querySelector("#primary-unit");
-  let secondaryUnit = document.querySelector("#secondary-unit");
   let temperatureElement = document.querySelector("#current-temperature");
-  let fahrenheitTemperature = Math.round(
-    (temperatureElement.innerHTML * 9) / 5 + 32
-  );
-
-  //if ()
+  let fahrenheitTemperature = Math.round((celciusTemperature * 9) / 5 + 32);
   temperatureElement.innerHTML = `${fahrenheitTemperature}`;
-  primaryUnit.innerHTML = "°F |";
-  secondaryUnit.innerHTML = "°C";
-  console.log(secondaryUnit.innerHTML);
-
-  function switchUnitToCelcius(event) {
-    event.preventDefault();
-    let unitElement = document.querySelector("#primary-unit");
-    let temperatureElement = document.querySelector("#current-temperature");
-    let fahrenheitTemperature = Math.round(
-      (temperatureElement.innerHTML * 9) / 5 + 32
-    );
-    let celciusTemperature = Math.round((fahrenheitTemperature - 32) * (5 / 9));
-
-    temperatureElement.innerHTML = `${celciusTemperature}`;
-    unitElement.innerHTML = "°C |";
-    fahrenheitLink.innerHTML = "°F";
-  }
+  celciusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
 }
 
-function defineUnit() {
-  let primaryUnit = document.querySelector("#primary-unit");
-  let secondaryUnit = document.querySelector("#secondary-unit");
-  let unit = "metric";
-  if (unit === "metric") {
-    primaryUnit.innerHTML = "°C |";
-    secondaryUnit.innerHTML = "°F";
-  }
+function switchUnitToCelcius(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#current-temperature");
+  temperatureElement.innerHTML = Math.round(celciusTemperature);
+  celciusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
 }
+
+let celciusTemperature = null;
 
 let fahrenheitLink = document.querySelector("#secondary-unit");
-fahrenheitLink.addEventListener("click", switchUnit, { once: true });
+fahrenheitLink.addEventListener("click", switchUnitToFahrenheit);
 
-defineUnit();
+let celciusLink = document.querySelector("#primary-unit");
+celciusLink.addEventListener("click", switchUnitToCelcius);
 
 //Code to show current location & temperature upon load and when Current City button is pressed
 
@@ -307,6 +287,7 @@ function showTemperature(response) {
       "src",
       `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
     );
+  celciusTemperature = response.data.main.temp;
 }
 
 let button = document.querySelector("button");
