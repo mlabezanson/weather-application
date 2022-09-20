@@ -301,6 +301,12 @@ function showTemperature(response) {
   document.querySelector("#wind").innerHTML = `Wind Speed: ${Math.round(
     response.data.wind.speed
   )} km/h`;
+  document
+    .querySelector("#icon")
+    .setAttribute(
+      "src",
+      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    );
 }
 
 let button = document.querySelector("button");
