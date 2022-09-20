@@ -159,47 +159,6 @@ function formatTime() {
   }
 }
 
-let weekdays = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-
-let now = new Date();
-let dayElement = document.querySelector("#day");
-let dateElement = document.querySelector("#month-date-year");
-let timeElement = document.querySelector("#time");
-let forecastOneDay = document.querySelector("#forecast-one-day");
-let forecastOneDate = document.querySelector("#forecast-one-date");
-let forecastTwoDay = document.querySelector("#forecast-two-day");
-let forecastTwoDate = document.querySelector("#forecast-two-date");
-let forecastThreeDay = document.querySelector("#forecast-three-day");
-let forecastThreeDate = document.querySelector("#forecast-three-date");
-let forecastFourDay = document.querySelector("#forecast-four-day");
-let forecastFourDate = document.querySelector("#forecast-four-date");
-let forecastFiveDay = document.querySelector("#forecast-five-day");
-let forecastFiveDate = document.querySelector("#forecast-five-date");
-
-dayElement.innerHTML = formatWeekday(now);
-dateElement.innerHTML = formatDate(now);
-timeElement.innerHTML = formatTime(now);
-forecastOneDay.innerHTML = formatForecastOneDay();
-forecastOneDate.innerHTML = formatForecastOneDate();
-forecastTwoDay.innerHTML = formatForecastTwoDay();
-forecastTwoDate.innerHTML = formatForecastTwoDate();
-forecastThreeDay.innerHTML = formatForecastThreeDay();
-forecastThreeDate.innerHTML = formatForecastThreeDate();
-forecastFourDay.innerHTML = formatForecastFourDay();
-forecastFourDate.innerHTML = formatForecastFourDate();
-forecastFiveDay.innerHTML = formatForecastFiveDay();
-forecastFiveDate.innerHTML = formatForecastFiveDate();
-
-// Code to get weather API and utilize search function
-
 function newCitySearch(event) {
   event.preventDefault();
   let cityElement = document.querySelector("#current-city");
@@ -211,12 +170,6 @@ function newCitySearch(event) {
 
   axios.get(`${apiUrl}&appid=${apiKey}`).then(showTemperature);
 }
-
-let citySearchForm = document.querySelector("#city-search-form");
-citySearchForm.addEventListener("submit", newCitySearch);
-
-// Code to switch between temperature units
-// Cannot get the units to switch back from F to C!!!
 
 function switchUnitToFahrenheit(event) {
   event.preventDefault();
@@ -234,16 +187,6 @@ function switchUnitToCelcius(event) {
   celciusLink.classList.add("active");
   fahrenheitLink.classList.remove("active");
 }
-
-let celciusTemperature = null;
-
-let fahrenheitLink = document.querySelector("#secondary-unit");
-fahrenheitLink.addEventListener("click", switchUnitToFahrenheit);
-
-let celciusLink = document.querySelector("#primary-unit");
-celciusLink.addEventListener("click", switchUnitToCelcius);
-
-//Code to show current location & temperature upon load and when Current City button is pressed
 
 function getCurrentPosition() {
   navigator.geolocation.getCurrentPosition(showPosition);
@@ -290,7 +233,57 @@ function showTemperature(response) {
   celciusTemperature = response.data.main.temp;
 }
 
+let weekdays = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+
+let now = new Date();
+let dayElement = document.querySelector("#day");
+let dateElement = document.querySelector("#month-date-year");
+let timeElement = document.querySelector("#time");
+let forecastOneDay = document.querySelector("#forecast-one-day");
+let forecastOneDate = document.querySelector("#forecast-one-date");
+let forecastTwoDay = document.querySelector("#forecast-two-day");
+let forecastTwoDate = document.querySelector("#forecast-two-date");
+let forecastThreeDay = document.querySelector("#forecast-three-day");
+let forecastThreeDate = document.querySelector("#forecast-three-date");
+let forecastFourDay = document.querySelector("#forecast-four-day");
+let forecastFourDate = document.querySelector("#forecast-four-date");
+let forecastFiveDay = document.querySelector("#forecast-five-day");
+let forecastFiveDate = document.querySelector("#forecast-five-date");
+
 let button = document.querySelector("button");
 button.addEventListener("click", getCurrentPosition);
+
+let citySearchForm = document.querySelector("#city-search-form");
+citySearchForm.addEventListener("submit", newCitySearch);
+
+let celciusTemperature = null;
+
+let fahrenheitLink = document.querySelector("#secondary-unit");
+fahrenheitLink.addEventListener("click", switchUnitToFahrenheit);
+
+let celciusLink = document.querySelector("#primary-unit");
+celciusLink.addEventListener("click", switchUnitToCelcius);
+
+dayElement.innerHTML = formatWeekday(now);
+dateElement.innerHTML = formatDate(now);
+timeElement.innerHTML = formatTime(now);
+forecastOneDay.innerHTML = formatForecastOneDay();
+forecastOneDate.innerHTML = formatForecastOneDate();
+forecastTwoDay.innerHTML = formatForecastTwoDay();
+forecastTwoDate.innerHTML = formatForecastTwoDate();
+forecastThreeDay.innerHTML = formatForecastThreeDay();
+forecastThreeDate.innerHTML = formatForecastThreeDate();
+forecastFourDay.innerHTML = formatForecastFourDay();
+forecastFourDate.innerHTML = formatForecastFourDate();
+forecastFiveDay.innerHTML = formatForecastFiveDay();
+forecastFiveDate.innerHTML = formatForecastFiveDate();
 
 navigator.geolocation.getCurrentPosition(showPosition);
