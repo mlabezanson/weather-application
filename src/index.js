@@ -152,7 +152,7 @@ function formatTime() {
     minute = `00`;
   }
 
-  if (hour < 12) {
+  if (hour > 12) {
     return `${hour}:${minute} PM`;
   } else {
     return `${hour}:${minute} AM`;
