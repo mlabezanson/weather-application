@@ -36,7 +36,7 @@ row {
 }
 
 .current-city-info {
-  background-color: rgb(255, 255, 255, 0.8);
+  background-color: rgb(227, 232, 247, 0.7);
 }
 
 .current-temp {
@@ -80,7 +80,7 @@ h2 .active:hover {
 }
 
 .future-forecast-day {
-  background-color: rgb(255, 255, 255, 0.8);
+  background-color: rgb(227, 232, 247, 0.7);
   border: 1px solid #000;
   color: #2b4060;
   padding: 10px 15px 0 15px;
@@ -104,7 +104,7 @@ h2 .active:hover {
 }
 
 .primary-weather {
-  background-color: rgb(255, 255, 255, 0.8);
+  background-color: rgb(227, 232, 247, 0.7);
   border: 1px solid #000;
   color: #2b4060;
   font-family: "Poppins", sans-serif;
