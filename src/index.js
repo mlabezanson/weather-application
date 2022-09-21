@@ -328,7 +328,6 @@ function getCurrentPosition() {
 }
 
 function newCitySearch(event) {
-  event.preventDefault();
   let cityElement = document.querySelector("#current-city");
   let cityInput = document.querySelector("#city-search-input");
   cityElement.innerHTML = cityInput.value;
@@ -515,7 +514,7 @@ let forecastFourDate = document.querySelector("#forecast-four-date");
 let forecastFiveDay = document.querySelector("#forecast-five-day");
 let forecastFiveDate = document.querySelector("#forecast-five-date");
 
-let button = document.querySelector("button");
+let button = document.querySelector("#current-city-button");
 button.addEventListener("click", getCurrentPosition);
 
 let citySearchForm = document.querySelector("#city-search-form");
