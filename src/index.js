@@ -176,6 +176,70 @@ function switchUnitToFahrenheit(event) {
   let temperatureElement = document.querySelector("#current-temperature");
   let fahrenheitTemperature = Math.round((celciusTemperature * 9) / 5 + 32);
   temperatureElement.innerHTML = `${fahrenheitTemperature}`;
+
+  let temperatureForecastOneHigh = document.querySelector("#forecast-one-high");
+  let fahrenheitForecastOneHigh = Math.round(
+    (celciusTemperatureOneHigh * 9) / 5 + 32
+  );
+  temperatureForecastOneHigh.innerHTML = `${fahrenheitForecastOneHigh} °F`;
+  let temperatureForecastOneLow = document.querySelector("#forecast-one-low");
+  let fahrenheitForecastOneLow = Math.round(
+    (celciusTemperatureOneLow * 9) / 5 + 32
+  );
+  temperatureForecastOneLow.innerHTML = `${fahrenheitForecastOneLow} °F`;
+
+  let temperatureForecastTwoHigh = document.querySelector("#forecast-two-high");
+  let fahrenheitForecastTwoHigh = Math.round(
+    (celciusTemperatureTwoHigh * 9) / 5 + 32
+  );
+  temperatureForecastTwoHigh.innerHTML = `${fahrenheitForecastTwoHigh} °F`;
+  let temperatureForecastTwoLow = document.querySelector("#forecast-two-low");
+  let fahrenheitForecastTwoLow = Math.round(
+    (celciusTemperatureTwoLow * 9) / 5 + 32
+  );
+  temperatureForecastTwoLow.innerHTML = `${fahrenheitForecastTwoLow} °F`;
+
+  let temperatureForecastThreeHigh = document.querySelector(
+    "#forecast-three-high"
+  );
+  let fahrenheitForecastThreeHigh = Math.round(
+    (celciusTemperatureThreeHigh * 9) / 5 + 32
+  );
+  temperatureForecastThreeHigh.innerHTML = `${fahrenheitForecastThreeHigh} °F`;
+  let temperatureForecastThreeLow = document.querySelector(
+    "#forecast-three-low"
+  );
+  let fahrenheitForecastThreeLow = Math.round(
+    (celciusTemperatureThreeLow * 9) / 5 + 32
+  );
+  temperatureForecastThreeLow.innerHTML = `${fahrenheitForecastThreeLow} °F`;
+
+  let temperatureForecastFourHigh = document.querySelector(
+    "#forecast-four-high"
+  );
+  let fahrenheitForecastFourHigh = Math.round(
+    (celciusTemperatureFourHigh * 9) / 5 + 32
+  );
+  temperatureForecastFourHigh.innerHTML = `${fahrenheitForecastFourHigh} °F`;
+  let temperatureForecastFourLow = document.querySelector("#forecast-four-low");
+  let fahrenheitForecastFourLow = Math.round(
+    (celciusTemperatureFourLow * 9) / 5 + 32
+  );
+  temperatureForecastFourLow.innerHTML = `${fahrenheitForecastFourLow} °F`;
+
+  let temperatureForecastFiveHigh = document.querySelector(
+    "#forecast-five-high"
+  );
+  let fahrenheitForecastFiveHigh = Math.round(
+    (celciusTemperatureFiveHigh * 9) / 5 + 32
+  );
+  temperatureForecastFiveHigh.innerHTML = `${fahrenheitForecastFiveHigh} °F`;
+  let temperatureForecastFiveLow = document.querySelector("#forecast-five-low");
+  let fahrenheitForecastFiveLow = Math.round(
+    (celciusTemperatureFiveLow * 9) / 5 + 32
+  );
+  temperatureForecastFiveLow.innerHTML = `${fahrenheitForecastFiveLow} °F`;
+
   celciusLink.classList.remove("active");
   fahrenheitLink.classList.add("active");
 }
@@ -184,6 +248,60 @@ function switchUnitToCelcius(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#current-temperature");
   temperatureElement.innerHTML = Math.round(celciusTemperature);
+
+  let temperatureForecastOneHigh = document.querySelector("#forecast-one-high");
+  temperatureForecastOneHigh.innerHTML = `${Math.round(
+    celciusTemperatureOneHigh
+  )} °C`;
+  let temperatureForecastOneLow = document.querySelector("#forecast-one-low");
+  temperatureForecastOneLow.innerHTML = `${Math.round(
+    celciusTemperatureOneLow
+  )} °C`;
+
+  let temperatureForecastTwoHigh = document.querySelector("#forecast-two-high");
+  temperatureForecastTwoHigh.innerHTML = `${Math.round(
+    celciusTemperatureTwoHigh
+  )} °C`;
+  let temperatureForecastTwoLow = document.querySelector("#forecast-two-low");
+  temperatureForecastTwoLow.innerHTML = `${Math.round(
+    celciusTemperatureTwoLow
+  )} °C`;
+
+  let temperatureForecastThreeHigh = document.querySelector(
+    "#forecast-three-high"
+  );
+  temperatureForecastThreeHigh.innerHTML = `${Math.round(
+    celciusTemperatureThreeHigh
+  )} °C`;
+  let temperatureForecastThreeLow = document.querySelector(
+    "#forecast-three-low"
+  );
+  temperatureForecastThreeLow.innerHTML = `${Math.round(
+    celciusTemperatureThreeLow
+  )} °C`;
+
+  let temperatureForecastFourHigh = document.querySelector(
+    "#forecast-four-high"
+  );
+  temperatureForecastFourHigh.innerHTML = `${Math.round(
+    celciusTemperatureFourHigh
+  )} °C`;
+  let temperatureForecastFourLow = document.querySelector("#forecast-four-low");
+  temperatureForecastFourLow.innerHTML = `${Math.round(
+    celciusTemperatureFourLow
+  )} °C`;
+
+  let temperatureForecastFiveHigh = document.querySelector(
+    "#forecast-five-high"
+  );
+  temperatureForecastFiveHigh.innerHTML = `${Math.round(
+    celciusTemperatureFiveHigh
+  )} °C`;
+  let temperatureForecastFiveLow = document.querySelector("#forecast-five-low");
+  temperatureForecastFiveLow.innerHTML = `${Math.round(
+    celciusTemperatureFiveLow
+  )} °C`;
+
   celciusLink.classList.add("active");
   fahrenheitLink.classList.remove("active");
 }
@@ -204,6 +322,7 @@ function showPosition(position) {
 }
 
 function showForecast(response) {
+  console.log(response);
   document.querySelector("#forecast-one-high").innerHTML = `${Math.round(
     response.data.list[0].main.temp_max
   )} °C`;
@@ -294,6 +413,16 @@ function showForecast(response) {
       "alt",
       `http://openweathermap.org/img/wn/${response.data.list[4].weather[0].description}@2x.png`
     );
+  celciusTemperatureOneHigh = Math.round(response.data.list[0].main.temp_max);
+  celciusTemperatureOneLow = Math.round(response.data.list[0].main.temp_min);
+  celciusTemperatureTwoHigh = Math.round(response.data.list[1].main.temp_max);
+  celciusTemperatureTwoLow = Math.round(response.data.list[1].main.temp_min);
+  celciusTemperatureThreeHigh = Math.round(response.data.list[2].main.temp_max);
+  celciusTemperatureThreeLow = Math.round(response.data.list[2].main.temp_min);
+  celciusTemperatureFourHigh = Math.round(response.data.list[3].main.temp_max);
+  celciusTemperatureFourLow = Math.round(response.data.list[3].main.temp_min);
+  celciusTemperatureFiveHigh = Math.round(response.data.list[4].main.temp_max);
+  celciusTemperatureFiveLow = Math.round(response.data.list[4].main.temp_min);
 }
 
 function showTemperature(response) {
@@ -359,6 +488,16 @@ let citySearchForm = document.querySelector("#city-search-form");
 citySearchForm.addEventListener("submit", newCitySearch);
 
 let celciusTemperature = null;
+let celciusTemperatureOneHigh = null;
+let celciusTemperatureOneLow = null;
+let celciusTemperatureTwoHigh = null;
+let celciusTemperatureTwoLow = null;
+let celciusTemperatureThreeHigh = null;
+let celciusTemperatureThreeLow = null;
+let celciusTemperatureFourHigh = null;
+let celciusTemperatureFourLow = null;
+let celciusTemperatureFiveHigh = null;
+let celciusTemperatureFiveLow = null;
 
 let fahrenheitLink = document.querySelector("#secondary-unit");
 fahrenheitLink.addEventListener("click", switchUnitToFahrenheit);
