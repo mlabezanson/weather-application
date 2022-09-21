@@ -165,6 +165,24 @@ function switchUnitToFahrenheit(event) {
   let fahrenheitTemperature = Math.round((celciusTemperature * 9) / 5 + 32);
   temperatureElement.innerHTML = `${fahrenheitTemperature}`;
 
+  let temperatureElementFeelsLike = document.querySelector("#feels-like");
+  let fahrenheitTemperatureFeelsLike = Math.round(
+    (celciusTemperatureFeelsLike * 9) / 5 + 32
+  );
+  temperatureElementFeelsLike.innerHTML = `${fahrenheitTemperatureFeelsLike} °F`;
+
+  let temperatureElementHigh = document.querySelector("#high");
+  let fahrenheitTemperatureHigh = Math.round(
+    (celciusTemperatureHigh * 9) / 5 + 32
+  );
+  temperatureElementHigh.innerHTML = `${fahrenheitTemperatureHigh} °F`;
+
+  let temperatureElementLow = document.querySelector("#low");
+  let fahrenheitTemperatureLow = Math.round(
+    (celciusTemperatureLow * 9) / 5 + 32
+  );
+  temperatureElementLow.innerHTML = `${fahrenheitTemperatureLow} °F`;
+
   let temperatureForecastOneHigh = document.querySelector("#forecast-one-high");
   let fahrenheitForecastOneHigh = Math.round(
     (celciusTemperatureOneHigh * 9) / 5 + 32
@@ -236,6 +254,17 @@ function switchUnitToCelcius(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#current-temperature");
   temperatureElement.innerHTML = Math.round(celciusTemperature);
+
+  let temperatureElementFeelsLike = document.querySelector("#feels-like");
+  temperatureElementFeelsLike.innerHTML = `${Math.round(
+    celciusTemperatureFeelsLike
+  )} °C`;
+
+  let temperatureElementHigh = document.querySelector("#high");
+  temperatureElementHigh.innerHTML = `${Math.round(celciusTemperatureHigh)} °C`;
+
+  let temperatureElementLow = document.querySelector("#low");
+  temperatureElementLow.innerHTML = `${Math.round(celciusTemperatureLow)} °C`;
 
   let temperatureForecastOneHigh = document.querySelector("#forecast-one-high");
   temperatureForecastOneHigh.innerHTML = `${Math.round(
@@ -432,15 +461,15 @@ function showTemperature(response) {
   document.querySelector("#current-temperature").innerHTML = Math.round(
     response.data.main.temp
   );
-  document.querySelector("#feels-like").innerHTML = `Feels like: ${Math.round(
+  document.querySelector("#feels-like").innerHTML = `${Math.round(
     response.data.main.feels_like
   )} °C`;
   document.querySelector("#description").innerHTML =
     response.data.weather[0].description;
-  document.querySelector("#high").innerHTML = `High: ${Math.round(
+  document.querySelector("#high").innerHTML = `${Math.round(
     response.data.main.temp_max
   )} °C`;
-  document.querySelector("#low").innerHTML = `Low: ${Math.round(
+  document.querySelector("#low").innerHTML = `${Math.round(
     response.data.main.temp_min
   )} °C`;
   document.querySelector(
@@ -456,6 +485,9 @@ function showTemperature(response) {
       `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
     );
   celciusTemperature = response.data.main.temp;
+  celciusTemperatureFeelsLike = response.data.main.feels_like;
+  celciusTemperatureHigh = response.data.main.temp_max;
+  celciusTemperatureLow = response.data.main.temp_min;
 }
 
 let weekdays = [
@@ -490,6 +522,9 @@ let citySearchForm = document.querySelector("#city-search-form");
 citySearchForm.addEventListener("submit", newCitySearch);
 
 let celciusTemperature = null;
+let celciusTemperatureFeelsLike = null;
+let celciusTemperatureHigh = null;
+let celciusTemperatureLow = null;
 let celciusTemperatureOneHigh = null;
 let celciusTemperatureOneLow = null;
 let celciusTemperatureTwoHigh = null;
