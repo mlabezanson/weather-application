@@ -204,18 +204,95 @@ function showPosition(position) {
 }
 
 function showForecast(response) {
-  console.log(response);
-  document.querySelector("#forecast-one-high").innerHTML = Math.round(
+  document.querySelector("#forecast-one-high").innerHTML = `${Math.round(
     response.data.list[0].main.temp_max
-  );
-  document.querySelector("#forecast-one-low").innerHTML = Math.round(
+  )} °C`;
+  document.querySelector("#forecast-one-low").innerHTML = `${Math.round(
     response.data.list[0].main.temp_min
-  );
+  )} °C`;
   document
     .querySelector("#forecast-one-icon")
     .setAttribute(
       "src",
       `http://openweathermap.org/img/wn/${response.data.list[0].weather[0].icon}@2x.png`
+    );
+  document
+    .querySelector("#forecast-one-icon")
+    .setAttribute(
+      "alt",
+      `http://openweathermap.org/img/wn/${response.data.list[0].weather[0].description}@2x.png`
+    );
+  document.querySelector("#forecast-two-high").innerHTML = `${Math.round(
+    response.data.list[1].main.temp_max
+  )} °C`;
+  document.querySelector("#forecast-two-low").innerHTML = `${Math.round(
+    response.data.list[1].main.temp_min
+  )} °C`;
+  document
+    .querySelector("#forecast-two-icon")
+    .setAttribute(
+      "src",
+      `http://openweathermap.org/img/wn/${response.data.list[1].weather[0].icon}@2x.png`
+    );
+  document
+    .querySelector("#forecast-two-icon")
+    .setAttribute(
+      "alt",
+      `http://openweathermap.org/img/wn/${response.data.list[1].weather[0].description}@2x.png`
+    );
+  document.querySelector("#forecast-three-high").innerHTML = `${Math.round(
+    response.data.list[2].main.temp_max
+  )} °C`;
+  document.querySelector("#forecast-three-low").innerHTML = `${Math.round(
+    response.data.list[2].main.temp_min
+  )} °C`;
+  document
+    .querySelector("#forecast-three-icon")
+    .setAttribute(
+      "src",
+      `http://openweathermap.org/img/wn/${response.data.list[2].weather[0].icon}@2x.png`
+    );
+  document
+    .querySelector("#forecast-three-icon")
+    .setAttribute(
+      "alt",
+      `http://openweathermap.org/img/wn/${response.data.list[2].weather[0].description}@2x.png`
+    );
+  document.querySelector("#forecast-four-high").innerHTML = `${Math.round(
+    response.data.list[3].main.temp_max
+  )} °C`;
+  document.querySelector("#forecast-four-low").innerHTML = `${Math.round(
+    response.data.list[3].main.temp_min
+  )} °C`;
+  document
+    .querySelector("#forecast-four-icon")
+    .setAttribute(
+      "src",
+      `http://openweathermap.org/img/wn/${response.data.list[3].weather[0].icon}@2x.png`
+    );
+  document
+    .querySelector("#forecast-four-icon")
+    .setAttribute(
+      "alt",
+      `http://openweathermap.org/img/wn/${response.data.list[3].weather[0].description}@2x.png`
+    );
+  document.querySelector("#forecast-five-high").innerHTML = `${Math.round(
+    response.data.list[4].main.temp_max
+  )} °C`;
+  document.querySelector("#forecast-five-low").innerHTML = `${Math.round(
+    response.data.list[4].main.temp_min
+  )} °C`;
+  document
+    .querySelector("#forecast-five-icon")
+    .setAttribute(
+      "src",
+      `http://openweathermap.org/img/wn/${response.data.list[4].weather[0].icon}@2x.png`
+    );
+  document
+    .querySelector("#forecast-five-icon")
+    .setAttribute(
+      "alt",
+      `http://openweathermap.org/img/wn/${response.data.list[4].weather[0].description}@2x.png`
     );
 }
 

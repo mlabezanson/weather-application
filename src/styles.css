@@ -79,11 +79,20 @@ h2 .active:hover {
   text-align: center;
 }
 
+.forecast-icon {
+  height: 40px;
+  width: 40px;
+}
+
 .future-forecast-day {
   background-color: rgb(227, 232, 247, 0.7);
   border: 1px solid #000;
   color: #2b4060;
   padding: 10px 15px 0 15px;
+}
+
+.high {
+  font-weight: 600;
 }
 
 .high-low {
