@@ -328,6 +328,7 @@ function getCurrentPosition() {
 }
 
 function newCitySearch(event) {
+  event.preventDefault();
   let cityElement = document.querySelector("#current-city");
   let cityInput = document.querySelector("#city-search-input");
   cityElement.innerHTML = cityInput.value;
