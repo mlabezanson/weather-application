@@ -4,55 +4,121 @@ function formatWeekday() {
   return dayIndex;
 }
 
-function formatForecastOneDay() {
-  let dayOne = now.getDay() + 1;
-  if (dayOne > 6) {
-    dayOne = dayOne - 7;
-  }
-  let dayIndex = weekdays[dayOne];
+function displayForecast() {
+  let forecastElement = document.querySelector("#future-forecast");
+  let forecastHTML = `<div class="future-forecast">`;
+  // let forecastHigh = document.querySelector("#forecast-high");
+  // let forecastLow = document.querySelector("#forecast-low");
 
-  return dayIndex;
+  let forecastDayNumber = [
+    `${now.getDay() + 1}`,
+    `${now.getDay() + 2}`,
+    `${now.getDay() + 3}`,
+    `${now.getDay() + 4}`,
+    `${now.getDay() + 5}`,
+  ];
+
+  if (forecastDayNumber[0] > 6) {
+    forecastDayNumber[0] = forecastDayNumber[0] - 7;
+  }
+  if (forecastDayNumber[1] > 6) {
+    forecastDayNumber[1] = forecastDayNumber[1] - 7;
+  }
+  if (forecastDayNumber[2] > 6) {
+    forecastDayNumber[2] = forecastDayNumber[2] - 7;
+  }
+  if (forecastDayNumber[3] > 6) {
+    forecastDayNumber[3] = forecastDayNumber[3] - 7;
+  }
+  if (forecastDayNumber[4] > 6) {
+    forecastDayNumber[4] = forecastDayNumber[4] - 7;
+  }
+
+  let forecast = [
+    [`${weekdays[forecastDayNumber[0]]}`],
+    [`${weekdays[forecastDayNumber[1]]}`],
+    [`${weekdays[forecastDayNumber[2]]}`],
+    [`${weekdays[forecastDayNumber[3]]}`],
+    [`${weekdays[forecastDayNumber[4]]}`],
+  ];
+
+  forecast.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="col">
+            <div
+              class="future-forecast-day border border-dark shadow rounded"
+            >
+              <div class="day" id="forecast-day">${day}</div>
+              <div class="date" id="forecast-date"></div>
+              <span class="high-low"
+                ><span class="high" id="forecast-high"></span> /
+                <span class="low" id="forecast-low"></span
+              ></span>
+              <div class="forecast-emoji">
+                <img
+                  src="#"
+                  alt=""
+                  class="forecast-icon"
+                  id="forecast-icon"
+                />
+              </div>
+          </div>`;
+
+    forecastHTML = forecastHTML + `</div>`;
+    forecastElement.innerHTML = forecastHTML;
+  });
 }
 
-function formatForecastTwoDay() {
-  let dayTwo = now.getDay() + 2;
-  if (dayTwo > 6) {
-    dayTwo = dayTwo - 7;
-  }
-  let dayIndex = weekdays[dayTwo];
+// function formatForecastOneDay() {
+//   let dayOne = now.getDay() + 1;
+//   if (dayOne > 6) {
+//     dayOne = dayOne - 7;
+//   }
+//   let dayIndex = weekdays[dayOne];
 
-  return dayIndex;
-}
+//   return dayIndex;
+// }
 
-function formatForecastThreeDay() {
-  let dayThree = now.getDay() + 3;
-  if (dayThree > 6) {
-    dayThree = dayThree - 7;
-  }
-  let dayIndex = weekdays[dayThree];
+// function formatForecastTwoDay() {
+//   let dayTwo = now.getDay() + 2;
+//   if (dayTwo > 6) {
+//     dayTwo = dayTwo - 7;
+//   }
+//   let dayIndex = weekdays[dayTwo];
 
-  return dayIndex;
-}
+//   return dayIndex;
+// }
 
-function formatForecastFourDay() {
-  let dayFour = now.getDay() + 4;
-  if (dayFour > 6) {
-    dayFour = dayFour - 7;
-  }
-  let dayIndex = weekdays[dayFour];
+// function formatForecastThreeDay() {
+//   let dayThree = now.getDay() + 3;
+//   if (dayThree > 6) {
+//     dayThree = dayThree - 7;
+//   }
+//   let dayIndex = weekdays[dayThree];
 
-  return dayIndex;
-}
+//   return dayIndex;
+// }
 
-function formatForecastFiveDay() {
-  let dayFive = now.getDay() + 5;
-  if (dayFive > 6) {
-    dayFive = dayFive - 7;
-  }
-  let dayIndex = weekdays[dayFive];
+// function formatForecastFourDay() {
+//   let dayFour = now.getDay() + 4;
+//   if (dayFour > 6) {
+//     dayFour = dayFour - 7;
+//   }
+//   let dayIndex = weekdays[dayFour];
 
-  return dayIndex;
-}
+//   return dayIndex;
+// }
+
+// function formatForecastFiveDay() {
+//   let dayFive = now.getDay() + 5;
+//   if (dayFive > 6) {
+//     dayFive = dayFive - 7;
+//   }
+//   let dayIndex = weekdays[dayFive];
+
+//   return dayIndex;
+// }
 
 function formatDate() {
   let months = [
@@ -77,65 +143,65 @@ function formatDate() {
   return `${monthIndex} ${date}, ${year}`;
 }
 
-function formatForecastOneDate() {
-  let dayOne = new Date();
-  dayOne.setDate(new Date().getDate() + 1);
-  let dayOneDate = dayOne.getDate();
-  let dayOneMonth = dayOne.getMonth() + 1;
-  if (dayOneMonth < 10) {
-    dayOneMonth = `0${dayOneMonth}`;
-  }
+// function formatForecastOneDate() {
+//   let dayOne = new Date();
+//   dayOne.setDate(new Date().getDate() + 1);
+//   let dayOneDate = dayOne.getDate();
+//   let dayOneMonth = dayOne.getMonth() + 1;
+//   if (dayOneMonth < 10) {
+//     dayOneMonth = `0${dayOneMonth}`;
+//   }
 
-  return `${dayOneMonth}/${dayOneDate}`;
-}
+//   return `${dayOneMonth}/${dayOneDate}`;
+// }
 
-function formatForecastTwoDate() {
-  let dayTwo = new Date();
-  dayTwo.setDate(new Date().getDate() + 2);
-  let dayTwoDate = dayTwo.getDate();
-  let dayTwoMonth = dayTwo.getMonth() + 1;
-  if (dayTwoMonth < 10) {
-    dayTwoMonth = `0${dayTwoMonth}`;
-  }
+// function formatForecastTwoDate() {
+//   let dayTwo = new Date();
+//   dayTwo.setDate(new Date().getDate() + 2);
+//   let dayTwoDate = dayTwo.getDate();
+//   let dayTwoMonth = dayTwo.getMonth() + 1;
+//   if (dayTwoMonth < 10) {
+//     dayTwoMonth = `0${dayTwoMonth}`;
+//   }
 
-  return `${dayTwoMonth}/${dayTwoDate}`;
-}
+//   return `${dayTwoMonth}/${dayTwoDate}`;
+// }
 
-function formatForecastThreeDate() {
-  let dayThree = new Date();
-  dayThree.setDate(new Date().getDate() + 3);
-  let dayThreeDate = dayThree.getDate();
-  let dayThreeMonth = dayThree.getMonth() + 1;
-  if (dayThreeMonth < 10) {
-    dayThreeMonth = `0${dayThreeMonth}`;
-  }
+// function formatForecastThreeDate() {
+//   let dayThree = new Date();
+//   dayThree.setDate(new Date().getDate() + 3);
+//   let dayThreeDate = dayThree.getDate();
+//   let dayThreeMonth = dayThree.getMonth() + 1;
+//   if (dayThreeMonth < 10) {
+//     dayThreeMonth = `0${dayThreeMonth}`;
+//   }
 
-  return `${dayThreeMonth}/${dayThreeDate}`;
-}
+//   return `${dayThreeMonth}/${dayThreeDate}`;
+// }
 
-function formatForecastFourDate() {
-  let dayFour = new Date();
-  dayFour.setDate(new Date().getDate() + 4);
-  let dayFourDate = dayFour.getDate();
-  let dayFourMonth = dayFour.getMonth() + 1;
-  if (dayFourMonth < 10) {
-    dayFourMonth = `0${dayFourMonth}`;
-  }
+// function formatForecastFourDate() {
+//   let dayFour = new Date();
+//   dayFour.setDate(new Date().getDate() + 4);
+//   let dayFourDate = dayFour.getDate();
+//   let dayFourMonth = dayFour.getMonth() + 1;
+//   if (dayFourMonth < 10) {
+//     dayFourMonth = `0${dayFourMonth}`;
+//   }
 
-  return `${dayFourMonth}/${dayFourDate}`;
-}
+//   return `${dayFourMonth}/${dayFourDate}`;
+// }
 
-function formatForecastFiveDate() {
-  let dayFive = new Date();
-  dayFive.setDate(new Date().getDate() + 5);
-  let dayFiveDate = dayFive.getDate();
-  let dayFiveMonth = dayFive.getMonth() + 1;
-  if (dayFiveMonth < 10) {
-    dayFiveMonth = `0${dayFiveMonth}`;
-  }
+// function formatForecastFiveDate() {
+//   let dayFive = new Date();
+//   dayFive.setDate(new Date().getDate() + 5);
+//   let dayFiveDate = dayFive.getDate();
+//   let dayFiveMonth = dayFive.getMonth() + 1;
+//   if (dayFiveMonth < 10) {
+//     dayFiveMonth = `0${dayFiveMonth}`;
+//   }
 
-  return `${dayFiveMonth}/${dayFiveDate}`;
-}
+//   return `${dayFiveMonth}/${dayFiveDate}`;
+// }
 
 function formatTime() {
   let hour = now.getHours();
@@ -183,68 +249,68 @@ function switchUnitToFahrenheit(event) {
   );
   temperatureElementLow.innerHTML = `${fahrenheitTemperatureLow} °F`;
 
-  let temperatureForecastOneHigh = document.querySelector("#forecast-one-high");
-  let fahrenheitForecastOneHigh = Math.round(
-    (celciusTemperatureOneHigh * 9) / 5 + 32
-  );
-  temperatureForecastOneHigh.innerHTML = `${fahrenheitForecastOneHigh} °F`;
-  let temperatureForecastOneLow = document.querySelector("#forecast-one-low");
-  let fahrenheitForecastOneLow = Math.round(
-    (celciusTemperatureOneLow * 9) / 5 + 32
-  );
-  temperatureForecastOneLow.innerHTML = `${fahrenheitForecastOneLow} °F`;
+  // let temperatureForecastOneHigh = document.querySelector("#forecast-one-high");
+  // let fahrenheitForecastOneHigh = Math.round(
+  //   (celciusTemperatureOneHigh * 9) / 5 + 32
+  // );
+  // temperatureForecastOneHigh.innerHTML = `${fahrenheitForecastOneHigh} °F`;
+  // let temperatureForecastOneLow = document.querySelector("#forecast-one-low");
+  // let fahrenheitForecastOneLow = Math.round(
+  //   (celciusTemperatureOneLow * 9) / 5 + 32
+  // );
+  // temperatureForecastOneLow.innerHTML = `${fahrenheitForecastOneLow} °F`;
 
-  let temperatureForecastTwoHigh = document.querySelector("#forecast-two-high");
-  let fahrenheitForecastTwoHigh = Math.round(
-    (celciusTemperatureTwoHigh * 9) / 5 + 32
-  );
-  temperatureForecastTwoHigh.innerHTML = `${fahrenheitForecastTwoHigh} °F`;
-  let temperatureForecastTwoLow = document.querySelector("#forecast-two-low");
-  let fahrenheitForecastTwoLow = Math.round(
-    (celciusTemperatureTwoLow * 9) / 5 + 32
-  );
-  temperatureForecastTwoLow.innerHTML = `${fahrenheitForecastTwoLow} °F`;
+  // let temperatureForecastTwoHigh = document.querySelector("#forecast-two-high");
+  // let fahrenheitForecastTwoHigh = Math.round(
+  //   (celciusTemperatureTwoHigh * 9) / 5 + 32
+  // );
+  // temperatureForecastTwoHigh.innerHTML = `${fahrenheitForecastTwoHigh} °F`;
+  // let temperatureForecastTwoLow = document.querySelector("#forecast-two-low");
+  // let fahrenheitForecastTwoLow = Math.round(
+  //   (celciusTemperatureTwoLow * 9) / 5 + 32
+  // );
+  // temperatureForecastTwoLow.innerHTML = `${fahrenheitForecastTwoLow} °F`;
 
-  let temperatureForecastThreeHigh = document.querySelector(
-    "#forecast-three-high"
-  );
-  let fahrenheitForecastThreeHigh = Math.round(
-    (celciusTemperatureThreeHigh * 9) / 5 + 32
-  );
-  temperatureForecastThreeHigh.innerHTML = `${fahrenheitForecastThreeHigh} °F`;
-  let temperatureForecastThreeLow = document.querySelector(
-    "#forecast-three-low"
-  );
-  let fahrenheitForecastThreeLow = Math.round(
-    (celciusTemperatureThreeLow * 9) / 5 + 32
-  );
-  temperatureForecastThreeLow.innerHTML = `${fahrenheitForecastThreeLow} °F`;
+  // let temperatureForecastThreeHigh = document.querySelector(
+  //   "#forecast-three-high"
+  // );
+  // let fahrenheitForecastThreeHigh = Math.round(
+  //   (celciusTemperatureThreeHigh * 9) / 5 + 32
+  // );
+  // temperatureForecastThreeHigh.innerHTML = `${fahrenheitForecastThreeHigh} °F`;
+  // let temperatureForecastThreeLow = document.querySelector(
+  //   "#forecast-three-low"
+  // );
+  // let fahrenheitForecastThreeLow = Math.round(
+  //   (celciusTemperatureThreeLow * 9) / 5 + 32
+  // );
+  // temperatureForecastThreeLow.innerHTML = `${fahrenheitForecastThreeLow} °F`;
 
-  let temperatureForecastFourHigh = document.querySelector(
-    "#forecast-four-high"
-  );
-  let fahrenheitForecastFourHigh = Math.round(
-    (celciusTemperatureFourHigh * 9) / 5 + 32
-  );
-  temperatureForecastFourHigh.innerHTML = `${fahrenheitForecastFourHigh} °F`;
-  let temperatureForecastFourLow = document.querySelector("#forecast-four-low");
-  let fahrenheitForecastFourLow = Math.round(
-    (celciusTemperatureFourLow * 9) / 5 + 32
-  );
-  temperatureForecastFourLow.innerHTML = `${fahrenheitForecastFourLow} °F`;
+  // let temperatureForecastFourHigh = document.querySelector(
+  //   "#forecast-four-high"
+  // );
+  // let fahrenheitForecastFourHigh = Math.round(
+  //   (celciusTemperatureFourHigh * 9) / 5 + 32
+  // );
+  // temperatureForecastFourHigh.innerHTML = `${fahrenheitForecastFourHigh} °F`;
+  // let temperatureForecastFourLow = document.querySelector("#forecast-four-low");
+  // let fahrenheitForecastFourLow = Math.round(
+  //   (celciusTemperatureFourLow * 9) / 5 + 32
+  // );
+  // temperatureForecastFourLow.innerHTML = `${fahrenheitForecastFourLow} °F`;
 
-  let temperatureForecastFiveHigh = document.querySelector(
-    "#forecast-five-high"
-  );
-  let fahrenheitForecastFiveHigh = Math.round(
-    (celciusTemperatureFiveHigh * 9) / 5 + 32
-  );
-  temperatureForecastFiveHigh.innerHTML = `${fahrenheitForecastFiveHigh} °F`;
-  let temperatureForecastFiveLow = document.querySelector("#forecast-five-low");
-  let fahrenheitForecastFiveLow = Math.round(
-    (celciusTemperatureFiveLow * 9) / 5 + 32
-  );
-  temperatureForecastFiveLow.innerHTML = `${fahrenheitForecastFiveLow} °F`;
+  // let temperatureForecastFiveHigh = document.querySelector(
+  //   "#forecast-five-high"
+  // );
+  // let fahrenheitForecastFiveHigh = Math.round(
+  //   (celciusTemperatureFiveHigh * 9) / 5 + 32
+  // );
+  // temperatureForecastFiveHigh.innerHTML = `${fahrenheitForecastFiveHigh} °F`;
+  // let temperatureForecastFiveLow = document.querySelector("#forecast-five-low");
+  // let fahrenheitForecastFiveLow = Math.round(
+  //   (celciusTemperatureFiveLow * 9) / 5 + 32
+  // );
+  // temperatureForecastFiveLow.innerHTML = `${fahrenheitForecastFiveLow} °F`;
 
   celciusLink.classList.remove("active");
   fahrenheitLink.classList.add("active");
@@ -266,58 +332,58 @@ function switchUnitToCelcius(event) {
   let temperatureElementLow = document.querySelector("#low");
   temperatureElementLow.innerHTML = `${Math.round(celciusTemperatureLow)} °C`;
 
-  let temperatureForecastOneHigh = document.querySelector("#forecast-one-high");
-  temperatureForecastOneHigh.innerHTML = `${Math.round(
-    celciusTemperatureOneHigh
-  )} °C`;
-  let temperatureForecastOneLow = document.querySelector("#forecast-one-low");
-  temperatureForecastOneLow.innerHTML = `${Math.round(
-    celciusTemperatureOneLow
-  )} °C`;
+  // let temperatureForecastOneHigh = document.querySelector("#forecast-one-high");
+  // temperatureForecastOneHigh.innerHTML = `${Math.round(
+  //   celciusTemperatureOneHigh
+  // )} °C`;
+  // let temperatureForecastOneLow = document.querySelector("#forecast-one-low");
+  // temperatureForecastOneLow.innerHTML = `${Math.round(
+  //   celciusTemperatureOneLow
+  // )} °C`;
 
-  let temperatureForecastTwoHigh = document.querySelector("#forecast-two-high");
-  temperatureForecastTwoHigh.innerHTML = `${Math.round(
-    celciusTemperatureTwoHigh
-  )} °C`;
-  let temperatureForecastTwoLow = document.querySelector("#forecast-two-low");
-  temperatureForecastTwoLow.innerHTML = `${Math.round(
-    celciusTemperatureTwoLow
-  )} °C`;
+  // let temperatureForecastTwoHigh = document.querySelector("#forecast-two-high");
+  // temperatureForecastTwoHigh.innerHTML = `${Math.round(
+  //   celciusTemperatureTwoHigh
+  // )} °C`;
+  // let temperatureForecastTwoLow = document.querySelector("#forecast-two-low");
+  // temperatureForecastTwoLow.innerHTML = `${Math.round(
+  //   celciusTemperatureTwoLow
+  // )} °C`;
 
-  let temperatureForecastThreeHigh = document.querySelector(
-    "#forecast-three-high"
-  );
-  temperatureForecastThreeHigh.innerHTML = `${Math.round(
-    celciusTemperatureThreeHigh
-  )} °C`;
-  let temperatureForecastThreeLow = document.querySelector(
-    "#forecast-three-low"
-  );
-  temperatureForecastThreeLow.innerHTML = `${Math.round(
-    celciusTemperatureThreeLow
-  )} °C`;
+  // let temperatureForecastThreeHigh = document.querySelector(
+  //   "#forecast-three-high"
+  // );
+  // temperatureForecastThreeHigh.innerHTML = `${Math.round(
+  //   celciusTemperatureThreeHigh
+  // )} °C`;
+  // let temperatureForecastThreeLow = document.querySelector(
+  //   "#forecast-three-low"
+  // );
+  // temperatureForecastThreeLow.innerHTML = `${Math.round(
+  //   celciusTemperatureThreeLow
+  // )} °C`;
 
-  let temperatureForecastFourHigh = document.querySelector(
-    "#forecast-four-high"
-  );
-  temperatureForecastFourHigh.innerHTML = `${Math.round(
-    celciusTemperatureFourHigh
-  )} °C`;
-  let temperatureForecastFourLow = document.querySelector("#forecast-four-low");
-  temperatureForecastFourLow.innerHTML = `${Math.round(
-    celciusTemperatureFourLow
-  )} °C`;
+  // let temperatureForecastFourHigh = document.querySelector(
+  //   "#forecast-four-high"
+  // );
+  // temperatureForecastFourHigh.innerHTML = `${Math.round(
+  //   celciusTemperatureFourHigh
+  // )} °C`;
+  // let temperatureForecastFourLow = document.querySelector("#forecast-four-low");
+  // temperatureForecastFourLow.innerHTML = `${Math.round(
+  //   celciusTemperatureFourLow
+  // )} °C`;
 
-  let temperatureForecastFiveHigh = document.querySelector(
-    "#forecast-five-high"
-  );
-  temperatureForecastFiveHigh.innerHTML = `${Math.round(
-    celciusTemperatureFiveHigh
-  )} °C`;
-  let temperatureForecastFiveLow = document.querySelector("#forecast-five-low");
-  temperatureForecastFiveLow.innerHTML = `${Math.round(
-    celciusTemperatureFiveLow
-  )} °C`;
+  // let temperatureForecastFiveHigh = document.querySelector(
+  //   "#forecast-five-high"
+  // );
+  // temperatureForecastFiveHigh.innerHTML = `${Math.round(
+  //   celciusTemperatureFiveHigh
+  // )} °C`;
+  // let temperatureForecastFiveLow = document.querySelector("#forecast-five-low");
+  // temperatureForecastFiveLow.innerHTML = `${Math.round(
+  //   celciusTemperatureFiveLow
+  // )} °C`;
 
   celciusLink.classList.add("active");
   fahrenheitLink.classList.remove("active");
@@ -353,107 +419,110 @@ function showPosition(position) {
 }
 
 function showForecast(response) {
-  console.log(response);
-  document.querySelector("#forecast-one-high").innerHTML = `${Math.round(
+  //   document.querySelector("#forecast-one-high").innerHTML = `${Math.round(
+  //     response.data.list[0].main.temp_max
+  //   )} °C`;
+  //   document.querySelector("#forecast-one-low").innerHTML = `${Math.round(
+  //     response.data.list[0].main.temp_min
+  //   )} °C`;
+  //   document
+  //     .querySelector("#forecast-one-icon")
+  //     .setAttribute(
+  //       "src",
+  //       `http://openweathermap.org/img/wn/${response.data.list[0].weather[0].icon}@2x.png`
+  //     );
+  //   document
+  //     .querySelector("#forecast-one-icon")
+  //     .setAttribute(
+  //       "alt",
+  //       `http://openweathermap.org/img/wn/${response.data.list[0].weather[0].description}@2x.png`
+  //     );
+  //   document.querySelector("#forecast-two-high").innerHTML = `${Math.round(
+  //     response.data.list[1].main.temp_max
+  //   )} °C`;
+  //   document.querySelector("#forecast-two-low").innerHTML = `${Math.round(
+  //     response.data.list[1].main.temp_min
+  //   )} °C`;
+  //   document
+  //     .querySelector("#forecast-two-icon")
+  //     .setAttribute(
+  //       "src",
+  //       `http://openweathermap.org/img/wn/${response.data.list[1].weather[0].icon}@2x.png`
+  //     );
+  //   document
+  //     .querySelector("#forecast-two-icon")
+  //     .setAttribute(
+  //       "alt",
+  //       `http://openweathermap.org/img/wn/${response.data.list[1].weather[0].description}@2x.png`
+  //     );
+  //   document.querySelector("#forecast-three-high").innerHTML = `${Math.round(
+  //     response.data.list[2].main.temp_max
+  //   )} °C`;
+  //   document.querySelector("#forecast-three-low").innerHTML = `${Math.round(
+  //     response.data.list[2].main.temp_min
+  //   )} °C`;
+  //   document
+  //     .querySelector("#forecast-three-icon")
+  //     .setAttribute(
+  //       "src",
+  //       `http://openweathermap.org/img/wn/${response.data.list[2].weather[0].icon}@2x.png`
+  //     );
+  //   document
+  //     .querySelector("#forecast-three-icon")
+  //     .setAttribute(
+  //       "alt",
+  //       `http://openweathermap.org/img/wn/${response.data.list[2].weather[0].description}@2x.png`
+  //     );
+  //   document.querySelector("#forecast-four-high").innerHTML = `${Math.round(
+  //     response.data.list[3].main.temp_max
+  //   )} °C`;
+  //   document.querySelector("#forecast-four-low").innerHTML = `${Math.round(
+  //     response.data.list[3].main.temp_min
+  //   )} °C`;
+  //   document
+  //     .querySelector("#forecast-four-icon")
+  //     .setAttribute(
+  //       "src",
+  //       `http://openweathermap.org/img/wn/${response.data.list[3].weather[0].icon}@2x.png`
+  //     );
+  //   document
+  //     .querySelector("#forecast-four-icon")
+  //     .setAttribute(
+  //       "alt",
+  //       `http://openweathermap.org/img/wn/${response.data.list[3].weather[0].description}@2x.png`
+  //     );
+  //   document.querySelector("#forecast-five-high").innerHTML = `${Math.round(
+  //     response.data.list[4].main.temp_max
+  //   )} °C`;
+  //   document.querySelector("#forecast-five-low").innerHTML = `${Math.round(
+  //     response.data.list[4].main.temp_min
+  //   )} °C`;
+  //   document
+  //     .querySelector("#forecast-five-icon")
+  //     .setAttribute(
+  //       "src",
+  //       `http://openweathermap.org/img/wn/${response.data.list[4].weather[0].icon}@2x.png`
+  //     );
+  //   document
+  //   .querySelector("#forecast-five-icon")
+  //   .setAttribute(
+  //     "alt",
+  //     `http://openweathermap.org/img/wn/${response.data.list[4].weather[0].description}@2x.png`
+  //     );
+  celciusTemperatureForecastHigh = Math.round(
     response.data.list[0].main.temp_max
-  )} °C`;
-  document.querySelector("#forecast-one-low").innerHTML = `${Math.round(
+  );
+  celciusTemperatureForecastLow = Math.round(
     response.data.list[0].main.temp_min
-  )} °C`;
-  document
-    .querySelector("#forecast-one-icon")
-    .setAttribute(
-      "src",
-      `http://openweathermap.org/img/wn/${response.data.list[0].weather[0].icon}@2x.png`
-    );
-  document
-    .querySelector("#forecast-one-icon")
-    .setAttribute(
-      "alt",
-      `http://openweathermap.org/img/wn/${response.data.list[0].weather[0].description}@2x.png`
-    );
-  document.querySelector("#forecast-two-high").innerHTML = `${Math.round(
-    response.data.list[1].main.temp_max
-  )} °C`;
-  document.querySelector("#forecast-two-low").innerHTML = `${Math.round(
-    response.data.list[1].main.temp_min
-  )} °C`;
-  document
-    .querySelector("#forecast-two-icon")
-    .setAttribute(
-      "src",
-      `http://openweathermap.org/img/wn/${response.data.list[1].weather[0].icon}@2x.png`
-    );
-  document
-    .querySelector("#forecast-two-icon")
-    .setAttribute(
-      "alt",
-      `http://openweathermap.org/img/wn/${response.data.list[1].weather[0].description}@2x.png`
-    );
-  document.querySelector("#forecast-three-high").innerHTML = `${Math.round(
-    response.data.list[2].main.temp_max
-  )} °C`;
-  document.querySelector("#forecast-three-low").innerHTML = `${Math.round(
-    response.data.list[2].main.temp_min
-  )} °C`;
-  document
-    .querySelector("#forecast-three-icon")
-    .setAttribute(
-      "src",
-      `http://openweathermap.org/img/wn/${response.data.list[2].weather[0].icon}@2x.png`
-    );
-  document
-    .querySelector("#forecast-three-icon")
-    .setAttribute(
-      "alt",
-      `http://openweathermap.org/img/wn/${response.data.list[2].weather[0].description}@2x.png`
-    );
-  document.querySelector("#forecast-four-high").innerHTML = `${Math.round(
-    response.data.list[3].main.temp_max
-  )} °C`;
-  document.querySelector("#forecast-four-low").innerHTML = `${Math.round(
-    response.data.list[3].main.temp_min
-  )} °C`;
-  document
-    .querySelector("#forecast-four-icon")
-    .setAttribute(
-      "src",
-      `http://openweathermap.org/img/wn/${response.data.list[3].weather[0].icon}@2x.png`
-    );
-  document
-    .querySelector("#forecast-four-icon")
-    .setAttribute(
-      "alt",
-      `http://openweathermap.org/img/wn/${response.data.list[3].weather[0].description}@2x.png`
-    );
-  document.querySelector("#forecast-five-high").innerHTML = `${Math.round(
-    response.data.list[4].main.temp_max
-  )} °C`;
-  document.querySelector("#forecast-five-low").innerHTML = `${Math.round(
-    response.data.list[4].main.temp_min
-  )} °C`;
-  document
-    .querySelector("#forecast-five-icon")
-    .setAttribute(
-      "src",
-      `http://openweathermap.org/img/wn/${response.data.list[4].weather[0].icon}@2x.png`
-    );
-  document
-    .querySelector("#forecast-five-icon")
-    .setAttribute(
-      "alt",
-      `http://openweathermap.org/img/wn/${response.data.list[4].weather[0].description}@2x.png`
-    );
-  celciusTemperatureOneHigh = Math.round(response.data.list[0].main.temp_max);
-  celciusTemperatureOneLow = Math.round(response.data.list[0].main.temp_min);
-  celciusTemperatureTwoHigh = Math.round(response.data.list[1].main.temp_max);
-  celciusTemperatureTwoLow = Math.round(response.data.list[1].main.temp_min);
-  celciusTemperatureThreeHigh = Math.round(response.data.list[2].main.temp_max);
-  celciusTemperatureThreeLow = Math.round(response.data.list[2].main.temp_min);
-  celciusTemperatureFourHigh = Math.round(response.data.list[3].main.temp_max);
-  celciusTemperatureFourLow = Math.round(response.data.list[3].main.temp_min);
-  celciusTemperatureFiveHigh = Math.round(response.data.list[4].main.temp_max);
-  celciusTemperatureFiveLow = Math.round(response.data.list[4].main.temp_min);
+  );
+  // celciusTemperatureTwoHigh = Math.round(response.data.list[1].main.temp_max);
+  // celciusTemperatureTwoLow = Math.round(response.data.list[1].main.temp_min);
+  // celciusTemperatureThreeHigh = Math.round(response.data.list[2].main.temp_max);
+  // celciusTemperatureThreeLow = Math.round(response.data.list[2].main.temp_min);
+  // celciusTemperatureFourHigh = Math.round(response.data.list[3].main.temp_max);
+  // celciusTemperatureFourLow = Math.round(response.data.list[3].main.temp_min);
+  // celciusTemperatureFiveHigh = Math.round(response.data.list[4].main.temp_max);
+  // celciusTemperatureFiveLow = Math.round(response.data.list[4].main.temp_min);
 }
 
 function showTemperature(response) {
@@ -504,16 +573,16 @@ let now = new Date();
 let dayElement = document.querySelector("#day");
 let dateElement = document.querySelector("#month-date-year");
 let timeElement = document.querySelector("#time");
-let forecastOneDay = document.querySelector("#forecast-one-day");
-let forecastOneDate = document.querySelector("#forecast-one-date");
-let forecastTwoDay = document.querySelector("#forecast-two-day");
-let forecastTwoDate = document.querySelector("#forecast-two-date");
-let forecastThreeDay = document.querySelector("#forecast-three-day");
-let forecastThreeDate = document.querySelector("#forecast-three-date");
-let forecastFourDay = document.querySelector("#forecast-four-day");
-let forecastFourDate = document.querySelector("#forecast-four-date");
-let forecastFiveDay = document.querySelector("#forecast-five-day");
-let forecastFiveDate = document.querySelector("#forecast-five-date");
+// let forecastOneDay = document.querySelector("#forecast-one-day");
+// let forecastOneDate = document.querySelector("#forecast-one-date");
+// let forecastTwoDay = document.querySelector("#forecast-two-day");
+// let forecastTwoDate = document.querySelector("#forecast-two-date");
+// let forecastThreeDay = document.querySelector("#forecast-three-day");
+// let forecastThreeDate = document.querySelector("#forecast-three-date");
+// let forecastFourDay = document.querySelector("#forecast-four-day");
+// let forecastFourDate = document.querySelector("#forecast-four-date");
+// let forecastFiveDay = document.querySelector("#forecast-five-day");
+// let forecastFiveDate = document.querySelector("#forecast-five-date");
 
 let button = document.querySelector("#current-city-button");
 button.addEventListener("click", getCurrentPosition);
@@ -525,16 +594,16 @@ let celciusTemperature = null;
 let celciusTemperatureFeelsLike = null;
 let celciusTemperatureHigh = null;
 let celciusTemperatureLow = null;
-let celciusTemperatureOneHigh = null;
-let celciusTemperatureOneLow = null;
-let celciusTemperatureTwoHigh = null;
-let celciusTemperatureTwoLow = null;
-let celciusTemperatureThreeHigh = null;
-let celciusTemperatureThreeLow = null;
-let celciusTemperatureFourHigh = null;
-let celciusTemperatureFourLow = null;
-let celciusTemperatureFiveHigh = null;
-let celciusTemperatureFiveLow = null;
+let celciusTemperatureForecastHigh = null;
+let celciusTemperatureForecastLow = null;
+// let celciusTemperatureTwoHigh = null;
+// let celciusTemperatureTwoLow = null;
+// let celciusTemperatureThreeHigh = null;
+// let celciusTemperatureThreeLow = null;
+// let celciusTemperatureFourHigh = null;
+// let celciusTemperatureFourLow = null;
+// let celciusTemperatureFiveHigh = null;
+// let celciusTemperatureFiveLow = null;
 
 let fahrenheitLink = document.querySelector("#secondary-unit");
 fahrenheitLink.addEventListener("click", switchUnitToFahrenheit);
@@ -545,15 +614,17 @@ celciusLink.addEventListener("click", switchUnitToCelcius);
 dayElement.innerHTML = formatWeekday(now);
 dateElement.innerHTML = formatDate(now);
 timeElement.innerHTML = formatTime(now);
-forecastOneDay.innerHTML = formatForecastOneDay();
-forecastOneDate.innerHTML = formatForecastOneDate();
-forecastTwoDay.innerHTML = formatForecastTwoDay();
-forecastTwoDate.innerHTML = formatForecastTwoDate();
-forecastThreeDay.innerHTML = formatForecastThreeDay();
-forecastThreeDate.innerHTML = formatForecastThreeDate();
-forecastFourDay.innerHTML = formatForecastFourDay();
-forecastFourDate.innerHTML = formatForecastFourDate();
-forecastFiveDay.innerHTML = formatForecastFiveDay();
-forecastFiveDate.innerHTML = formatForecastFiveDate();
+// forecastOneDay.innerHTML = formatForecastOneDay();
+// forecastOneDate.innerHTML = formatForecastOneDate();
+// forecastTwoDay.innerHTML = formatForecastTwoDay();
+// forecastTwoDate.innerHTML = formatForecastTwoDate();
+// forecastThreeDay.innerHTML = formatForecastThreeDay();
+// forecastThreeDate.innerHTML = formatForecastThreeDate();
+// forecastFourDay.innerHTML = formatForecastFourDay();
+// forecastFourDate.innerHTML = formatForecastFourDate();
+// forecastFiveDay.innerHTML = formatForecastFiveDay();
+// forecastFiveDate.innerHTML = formatForecastFiveDate();
 
 navigator.geolocation.getCurrentPosition(showPosition);
+
+displayForecast();
