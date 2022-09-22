@@ -6,7 +6,7 @@ function formatWeekday() {
 
 function displayForecast() {
   let forecastElement = document.querySelector("#future-forecast");
-  let forecastHTML = `<div class="future-forecast">`;
+  let forecastHTML = `<div class="row future-forecast">`;
   // let forecastHigh = document.querySelector("#forecast-high");
   // let forecastLow = document.querySelector("#forecast-low");
 
@@ -33,6 +33,18 @@ function displayForecast() {
   if (forecastDayNumber[4] > 6) {
     forecastDayNumber[4] = forecastDayNumber[4] - 7;
   }
+
+  // function formatForecastOneDate() {
+  //   let dayOne = new Date();
+  //   dayOne.setDate(new Date().getDate() + 1);
+  //   let dayOneDate = dayOne.getDate();
+  //   let dayOneMonth = dayOne.getMonth() + 1;
+  //   if (dayOneMonth < 10) {
+  //     dayOneMonth = `0${dayOneMonth}`;
+  //   }
+
+  //   return `${dayOneMonth}/${dayOneDate}`;
+  // }
 
   let forecast = [
     [`${weekdays[forecastDayNumber[0]]}`],
@@ -419,6 +431,7 @@ function showPosition(position) {
 }
 
 function showForecast(response) {
+  console.log(response);
   //   document.querySelector("#forecast-one-high").innerHTML = `${Math.round(
   //     response.data.list[0].main.temp_max
   //   )} °C`;
@@ -510,10 +523,10 @@ function showForecast(response) {
   //     `http://openweathermap.org/img/wn/${response.data.list[4].weather[0].description}@2x.png`
   //     );
   celciusTemperatureForecastHigh = Math.round(
-    response.data.list[0].main.temp_max
+    response.data.list[1].main.temp_max
   );
   celciusTemperatureForecastLow = Math.round(
-    response.data.list[0].main.temp_min
+    response.data.list[1].main.temp_min
   );
   // celciusTemperatureTwoHigh = Math.round(response.data.list[1].main.temp_max);
   // celciusTemperatureTwoLow = Math.round(response.data.list[1].main.temp_min);
