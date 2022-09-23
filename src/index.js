@@ -8,14 +8,16 @@ function displayForecast(response) {
   console.log(response);
   let forecastElement = document.querySelector("#future-forecast");
   let forecastHTML = `<div class="row future-forecast">`;
-  // celciusTemperatureForecastHigh = Math.round(
+  //celciusForecastHigh = Math.round(
   //   response.data.list[1].main.temp_max
   // );
   // celciusTemperatureForecastLow = Math.round(
   //   response.data.list[1].main.temp_min
   // );
-  // let forecastHigh = document.querySelector("#forecast-high");
-  // let forecastLow = document.querySelector("#forecast-low");
+  let forecastHigh = document.querySelector("#forecast-high");
+  let forecastLow = document.querySelector("#forecast-low");
+
+  //celciusForecastHigh = forecastHigh.innerHTML;
 
   let forecastDayNumber = [
     `${now.getDay() + 1}`,
@@ -93,12 +95,12 @@ function displayForecast(response) {
       `<div class="col">
             <div
               class="future-forecast-day border border-dark shadow rounded"
-            >
+              >
               <div class="day" id="forecast-day">${day}</div>
               <div class="date" id="forecast-date">${date}</div>
               <span class="high-low"
-                ><span class="high" id="forecast-high">${high}</span> /
-                <span class="low" id="forecast-low">${low}</span
+              ><span class="high" id="forecast-high">${high}</span> /
+              <span class="low" id="forecast-low">${low}</span
               ></span>
               <div class="forecast-emoji">
                 <img
@@ -106,9 +108,9 @@ function displayForecast(response) {
                   alt=""
                   class="forecast-icon"
                   id="forecast-icon"
-                />
-              </div>
-          </div>`;
+                  />
+                  </div>
+                  </div>`;
 
     forecastHTML = forecastHTML + `</div>`;
     forecastElement.innerHTML = forecastHTML;
@@ -158,34 +160,28 @@ function formatTime() {
 
 function switchUnitToFahrenheit(event) {
   event.preventDefault();
-  let temperatureElement = document.querySelector("#current-temperature");
-  let fahrenheitTemperature = Math.round((celciusTemperature * 9) / 5 + 32);
-  temperatureElement.innerHTML = `${fahrenheitTemperature}`;
 
-  let temperatureElementFeelsLike = document.querySelector("#feels-like");
-  let fahrenheitTemperatureFeelsLike = Math.round(
+  document.querySelector("#current-temperature").innerHTML = `${Math.round(
+    (celciusTemperature * 9) / 5 + 32
+  )}`;
+
+  document.querySelector("#feels-like").innerHTML = `${Math.round(
     (celciusTemperatureFeelsLike * 9) / 5 + 32
-  );
-  temperatureElementFeelsLike.innerHTML = `${fahrenheitTemperatureFeelsLike} °F`;
+  )} °F`;
 
-  let temperatureElementHigh = document.querySelector("#high");
-  let fahrenheitTemperatureHigh = Math.round(
+  document.querySelector("#high").innerHTML = `${Math.round(
     (celciusTemperatureHigh * 9) / 5 + 32
-  );
-  temperatureElementHigh.innerHTML = `${fahrenheitTemperatureHigh} °F`;
+  )} °F`;
 
-  let temperatureElementLow = document.querySelector("#low");
-  let fahrenheitTemperatureLow = Math.round(
+  document.querySelector("#low").innerHTML = `${Math.round(
     (celciusTemperatureLow * 9) / 5 + 32
-  );
-  temperatureElementLow.innerHTML = `${fahrenheitTemperatureLow} °F`;
+  )} °F`;
 
-  // let temperatureForecastOneHigh = document.querySelector("#forecast-one-high");
-  // let fahrenheitForecastOneHigh = Math.round(
-  //   (celciusTemperatureOneHigh * 9) / 5 + 32
-  // );
-  // temperatureForecastOneHigh.innerHTML = `${fahrenheitForecastOneHigh} °F`;
-  // let temperatureForecastOneLow = document.querySelector("#forecast-one-low");
+  // let forecastHigh = document.querySelector("#forecast-high");
+  // let fahrenheitForecastHigh = Math.round((celciusForecastHigh * 9) / 5 + 32);
+  // forecastHigh.innerHTML = `${fahrenheitForecastHigh} °F`;
+
+  //let temperatureForecastOneLow = document.querySelector("#forecast-one-low");
   // let fahrenheitForecastOneLow = Math.round(
   //   (celciusTemperatureOneLow * 9) / 5 + 32
   // );
@@ -332,7 +328,7 @@ function newCitySearch(event) {
   let apiKey = "59f81d670602d254d31607e29d1fe6d5";
   let unit = "metric";
   let apiUrlWeather = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput.value}&units=${unit}`;
-  axios.get(`${apiUrlWeather}&appid=${apiKey}`).then(showTemperature);
+  axios.get(`${apiUrlWeather}&appid=${apiKey}`).then(displayTemperature);
 
   let apiUrlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${cityInput.value}&units=${unit}&appid=${apiKey}`;
   axios.get(`${apiUrlForecast}`).then(displayForecast);
@@ -416,12 +412,12 @@ button.addEventListener("click", getCurrentPosition);
 let citySearchForm = document.querySelector("#city-search-form");
 citySearchForm.addEventListener("submit", newCitySearch);
 
-let celciusTemperature = null;
-let celciusTemperatureFeelsLike = null;
-let celciusTemperatureHigh = null;
-let celciusTemperatureLow = null;
-let celciusTemperatureForecastHigh = null;
-let celciusTemperatureForecastLow = null;
+let celciusTemperature,
+  celciusTemperatureFeelsLike,
+  celciusTemperatureHigh,
+  celciusTemperatureLow,
+  celciusForecastHigh,
+  celciusForecastLow = null;
 // let celciusTemperatureTwoHigh = null;
 // let celciusTemperatureTwoLow = null;
 // let celciusTemperatureThreeHigh = null;
