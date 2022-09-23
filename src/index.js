@@ -177,6 +177,10 @@ function switchUnitToFahrenheit(event) {
     (celciusTemperatureLow * 9) / 5 + 32
   )} °F`;
 
+  document.querySelector("#forecast-high").innerHTML = `°F`;
+
+  document.querySelector("#forecast-low").innerHTML = `°F`;
+
   // let forecastHigh = document.querySelector("#forecast-high");
   // let fahrenheitForecastHigh = Math.round((celciusForecastHigh * 9) / 5 + 32);
   // forecastHigh.innerHTML = `${fahrenheitForecastHigh} °F`;
@@ -245,19 +249,26 @@ function switchUnitToFahrenheit(event) {
 
 function switchUnitToCelcius(event) {
   event.preventDefault();
-  let temperatureElement = document.querySelector("#current-temperature");
-  temperatureElement.innerHTML = Math.round(celciusTemperature);
 
-  let temperatureElementFeelsLike = document.querySelector("#feels-like");
-  temperatureElementFeelsLike.innerHTML = `${Math.round(
+  document.querySelector("#current-temperature").innerHTML = `${Math.round(
+    celciusTemperature
+  )}`;
+
+  document.querySelector("#feels-like").innerHTML = `${Math.round(
     celciusTemperatureFeelsLike
   )} °C`;
 
-  let temperatureElementHigh = document.querySelector("#high");
-  temperatureElementHigh.innerHTML = `${Math.round(celciusTemperatureHigh)} °C`;
+  document.querySelector("#high").innerHTML = `${Math.round(
+    celciusTemperatureHigh
+  )} °C`;
 
-  let temperatureElementLow = document.querySelector("#low");
-  temperatureElementLow.innerHTML = `${Math.round(celciusTemperatureLow)} °C`;
+  document.querySelector("#low").innerHTML = `${Math.round(
+    celciusTemperatureLow
+  )} °C`;
+
+  document.querySelector("#forecast-high").innerHTML = `°C`;
+
+  document.querySelector("#forecast-low").innerHTML = `°C`;
 
   // let temperatureForecastOneHigh = document.querySelector("#forecast-one-high");
   // temperatureForecastOneHigh.innerHTML = `${Math.round(
