@@ -4,9 +4,16 @@ function formatWeekday() {
   return dayIndex;
 }
 
-function displayForecast() {
+function displayForecast(response) {
+  console.log(response);
   let forecastElement = document.querySelector("#future-forecast");
   let forecastHTML = `<div class="row future-forecast">`;
+  // celciusTemperatureForecastHigh = Math.round(
+  //   response.data.list[1].main.temp_max
+  // );
+  // celciusTemperatureForecastLow = Math.round(
+  //   response.data.list[1].main.temp_min
+  // );
   // let forecastHigh = document.querySelector("#forecast-high");
   // let forecastLow = document.querySelector("#forecast-low");
 
@@ -34,27 +41,53 @@ function displayForecast() {
     forecastDayNumber[4] = forecastDayNumber[4] - 7;
   }
 
-  // function formatForecastOneDate() {
-  //   let dayOne = new Date();
-  //   dayOne.setDate(new Date().getDate() + 1);
-  //   let dayOneDate = dayOne.getDate();
-  //   let dayOneMonth = dayOne.getMonth() + 1;
-  //   if (dayOneMonth < 10) {
-  //     dayOneMonth = `0${dayOneMonth}`;
-  //   }
-
-  //   return `${dayOneMonth}/${dayOneDate}`;
-  // }
-
-  let forecast = [
-    [`${weekdays[forecastDayNumber[0]]}`],
-    [`${weekdays[forecastDayNumber[1]]}`],
-    [`${weekdays[forecastDayNumber[2]]}`],
-    [`${weekdays[forecastDayNumber[3]]}`],
-    [`${weekdays[forecastDayNumber[4]]}`],
+  let dateArray = [
+    new Date(response.data.list[0].dt * 1000),
+    new Date(response.data.list[1].dt * 1000),
+    new Date(response.data.list[2].dt * 1000),
+    new Date(response.data.list[3].dt * 1000),
+    new Date(response.data.list[4].dt * 1000),
   ];
 
-  forecast.forEach(function (day) {
+  let forecast = [
+    [
+      `${weekdays[forecastDayNumber[0]]}`,
+      `${dateArray[0].getMonth() + 1}/${dateArray[0].getDate()}`,
+      `${Math.round(response.data.list[0].main.temp_max)} °C`,
+      `${Math.round(response.data.list[0].main.temp_min)} °C`,
+      `http://openweathermap.org/img/wn/${response.data.list[0].weather[0].icon}@2x.png`,
+    ],
+    [
+      `${weekdays[forecastDayNumber[1]]}`,
+      `${dateArray[1].getMonth() + 1}/${dateArray[1].getDate()}`,
+      `${Math.round(response.data.list[1].main.temp_max)} °C`,
+      `${Math.round(response.data.list[1].main.temp_min)} °C`,
+      `http://openweathermap.org/img/wn/${response.data.list[1].weather[0].icon}@2x.png`,
+    ],
+    [
+      `${weekdays[forecastDayNumber[2]]}`,
+      `${dateArray[2].getMonth() + 1}/${dateArray[2].getDate()}`,
+      `${Math.round(response.data.list[2].main.temp_max)} °C`,
+      `${Math.round(response.data.list[2].main.temp_min)} °C`,
+      `http://openweathermap.org/img/wn/${response.data.list[2].weather[0].icon}@2x.png`,
+    ],
+    [
+      `${weekdays[forecastDayNumber[3]]}`,
+      `${dateArray[3].getMonth() + 1}/${dateArray[3].getDate()}`,
+      `${Math.round(response.data.list[3].main.temp_max)} °C`,
+      `${Math.round(response.data.list[3].main.temp_min)} °C`,
+      `http://openweathermap.org/img/wn/${response.data.list[3].weather[0].icon}@2x.png`,
+    ],
+    [
+      `${weekdays[forecastDayNumber[4]]}`,
+      `${dateArray[4].getMonth() + 1}/${dateArray[4].getDate()}`,
+      `${Math.round(response.data.list[4].main.temp_max)} °C`,
+      `${Math.round(response.data.list[4].main.temp_min)} °C`,
+      `http://openweathermap.org/img/wn/${response.data.list[4].weather[0].icon}@2x.png`,
+    ],
+  ];
+
+  forecast.forEach(function ([day, date, high, low, icon]) {
     forecastHTML =
       forecastHTML +
       `<div class="col">
@@ -62,14 +95,14 @@ function displayForecast() {
               class="future-forecast-day border border-dark shadow rounded"
             >
               <div class="day" id="forecast-day">${day}</div>
-              <div class="date" id="forecast-date"></div>
+              <div class="date" id="forecast-date">${date}</div>
               <span class="high-low"
-                ><span class="high" id="forecast-high"></span> /
-                <span class="low" id="forecast-low"></span
+                ><span class="high" id="forecast-high">${high}</span> /
+                <span class="low" id="forecast-low">${low}</span
               ></span>
               <div class="forecast-emoji">
                 <img
-                  src="#"
+                  src="${icon}"
                   alt=""
                   class="forecast-icon"
                   id="forecast-icon"
@@ -81,56 +114,6 @@ function displayForecast() {
     forecastElement.innerHTML = forecastHTML;
   });
 }
-
-// function formatForecastOneDay() {
-//   let dayOne = now.getDay() + 1;
-//   if (dayOne > 6) {
-//     dayOne = dayOne - 7;
-//   }
-//   let dayIndex = weekdays[dayOne];
-
-//   return dayIndex;
-// }
-
-// function formatForecastTwoDay() {
-//   let dayTwo = now.getDay() + 2;
-//   if (dayTwo > 6) {
-//     dayTwo = dayTwo - 7;
-//   }
-//   let dayIndex = weekdays[dayTwo];
-
-//   return dayIndex;
-// }
-
-// function formatForecastThreeDay() {
-//   let dayThree = now.getDay() + 3;
-//   if (dayThree > 6) {
-//     dayThree = dayThree - 7;
-//   }
-//   let dayIndex = weekdays[dayThree];
-
-//   return dayIndex;
-// }
-
-// function formatForecastFourDay() {
-//   let dayFour = now.getDay() + 4;
-//   if (dayFour > 6) {
-//     dayFour = dayFour - 7;
-//   }
-//   let dayIndex = weekdays[dayFour];
-
-//   return dayIndex;
-// }
-
-// function formatForecastFiveDay() {
-//   let dayFive = now.getDay() + 5;
-//   if (dayFive > 6) {
-//     dayFive = dayFive - 7;
-//   }
-//   let dayIndex = weekdays[dayFive];
-
-//   return dayIndex;
-// }
 
 function formatDate() {
   let months = [
@@ -155,73 +138,9 @@ function formatDate() {
   return `${monthIndex} ${date}, ${year}`;
 }
 
-// function formatForecastOneDate() {
-//   let dayOne = new Date();
-//   dayOne.setDate(new Date().getDate() + 1);
-//   let dayOneDate = dayOne.getDate();
-//   let dayOneMonth = dayOne.getMonth() + 1;
-//   if (dayOneMonth < 10) {
-//     dayOneMonth = `0${dayOneMonth}`;
-//   }
-
-//   return `${dayOneMonth}/${dayOneDate}`;
-// }
-
-// function formatForecastTwoDate() {
-//   let dayTwo = new Date();
-//   dayTwo.setDate(new Date().getDate() + 2);
-//   let dayTwoDate = dayTwo.getDate();
-//   let dayTwoMonth = dayTwo.getMonth() + 1;
-//   if (dayTwoMonth < 10) {
-//     dayTwoMonth = `0${dayTwoMonth}`;
-//   }
-
-//   return `${dayTwoMonth}/${dayTwoDate}`;
-// }
-
-// function formatForecastThreeDate() {
-//   let dayThree = new Date();
-//   dayThree.setDate(new Date().getDate() + 3);
-//   let dayThreeDate = dayThree.getDate();
-//   let dayThreeMonth = dayThree.getMonth() + 1;
-//   if (dayThreeMonth < 10) {
-//     dayThreeMonth = `0${dayThreeMonth}`;
-//   }
-
-//   return `${dayThreeMonth}/${dayThreeDate}`;
-// }
-
-// function formatForecastFourDate() {
-//   let dayFour = new Date();
-//   dayFour.setDate(new Date().getDate() + 4);
-//   let dayFourDate = dayFour.getDate();
-//   let dayFourMonth = dayFour.getMonth() + 1;
-//   if (dayFourMonth < 10) {
-//     dayFourMonth = `0${dayFourMonth}`;
-//   }
-
-//   return `${dayFourMonth}/${dayFourDate}`;
-// }
-
-// function formatForecastFiveDate() {
-//   let dayFive = new Date();
-//   dayFive.setDate(new Date().getDate() + 5);
-//   let dayFiveDate = dayFive.getDate();
-//   let dayFiveMonth = dayFive.getMonth() + 1;
-//   if (dayFiveMonth < 10) {
-//     dayFiveMonth = `0${dayFiveMonth}`;
-//   }
-
-//   return `${dayFiveMonth}/${dayFiveDate}`;
-// }
-
 function formatTime() {
   let hour = now.getHours();
   let minute = now.getMinutes();
-
-  if (hour > 12) {
-    hour = `${hour - 12}`;
-  }
 
   if (minute < 10) {
     minute = `0${minute}`;
@@ -231,7 +150,7 @@ function formatTime() {
   }
 
   if (hour > 12) {
-    return `${hour}:${minute} PM`;
+    return `${hour - 12}:${minute} PM`;
   } else {
     return `${hour}:${minute} AM`;
   }
@@ -416,7 +335,7 @@ function newCitySearch(event) {
   axios.get(`${apiUrlWeather}&appid=${apiKey}`).then(showTemperature);
 
   let apiUrlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${cityInput.value}&units=${unit}&appid=${apiKey}`;
-  axios.get(`${apiUrlForecast}`).then(showForecast);
+  axios.get(`${apiUrlForecast}`).then(displayForecast);
 }
 
 function showPosition(position) {
@@ -425,120 +344,24 @@ function showPosition(position) {
   let unit = "metric";
   let apiKey = "59f81d670602d254d31607e29d1fe6d5";
   let apiUrlWeather = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=${unit}&appid=${apiKey}`;
-  axios.get(`${apiUrlWeather}`).then(showTemperature);
+  axios.get(`${apiUrlWeather}`).then(displayTemperature);
   let apiUrlForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=${unit}&appid=${apiKey}`;
-  axios.get(`${apiUrlForecast}`).then(showForecast);
+  axios.get(`${apiUrlForecast}`).then(displayForecast);
 }
 
-function showForecast(response) {
-  console.log(response);
-  //   document.querySelector("#forecast-one-high").innerHTML = `${Math.round(
-  //     response.data.list[0].main.temp_max
-  //   )} °C`;
-  //   document.querySelector("#forecast-one-low").innerHTML = `${Math.round(
-  //     response.data.list[0].main.temp_min
-  //   )} °C`;
-  //   document
-  //     .querySelector("#forecast-one-icon")
-  //     .setAttribute(
-  //       "src",
-  //       `http://openweathermap.org/img/wn/${response.data.list[0].weather[0].icon}@2x.png`
-  //     );
-  //   document
-  //     .querySelector("#forecast-one-icon")
-  //     .setAttribute(
-  //       "alt",
-  //       `http://openweathermap.org/img/wn/${response.data.list[0].weather[0].description}@2x.png`
-  //     );
-  //   document.querySelector("#forecast-two-high").innerHTML = `${Math.round(
-  //     response.data.list[1].main.temp_max
-  //   )} °C`;
-  //   document.querySelector("#forecast-two-low").innerHTML = `${Math.round(
-  //     response.data.list[1].main.temp_min
-  //   )} °C`;
-  //   document
-  //     .querySelector("#forecast-two-icon")
-  //     .setAttribute(
-  //       "src",
-  //       `http://openweathermap.org/img/wn/${response.data.list[1].weather[0].icon}@2x.png`
-  //     );
-  //   document
-  //     .querySelector("#forecast-two-icon")
-  //     .setAttribute(
-  //       "alt",
-  //       `http://openweathermap.org/img/wn/${response.data.list[1].weather[0].description}@2x.png`
-  //     );
-  //   document.querySelector("#forecast-three-high").innerHTML = `${Math.round(
-  //     response.data.list[2].main.temp_max
-  //   )} °C`;
-  //   document.querySelector("#forecast-three-low").innerHTML = `${Math.round(
-  //     response.data.list[2].main.temp_min
-  //   )} °C`;
-  //   document
-  //     .querySelector("#forecast-three-icon")
-  //     .setAttribute(
-  //       "src",
-  //       `http://openweathermap.org/img/wn/${response.data.list[2].weather[0].icon}@2x.png`
-  //     );
-  //   document
-  //     .querySelector("#forecast-three-icon")
-  //     .setAttribute(
-  //       "alt",
-  //       `http://openweathermap.org/img/wn/${response.data.list[2].weather[0].description}@2x.png`
-  //     );
-  //   document.querySelector("#forecast-four-high").innerHTML = `${Math.round(
-  //     response.data.list[3].main.temp_max
-  //   )} °C`;
-  //   document.querySelector("#forecast-four-low").innerHTML = `${Math.round(
-  //     response.data.list[3].main.temp_min
-  //   )} °C`;
-  //   document
-  //     .querySelector("#forecast-four-icon")
-  //     .setAttribute(
-  //       "src",
-  //       `http://openweathermap.org/img/wn/${response.data.list[3].weather[0].icon}@2x.png`
-  //     );
-  //   document
-  //     .querySelector("#forecast-four-icon")
-  //     .setAttribute(
-  //       "alt",
-  //       `http://openweathermap.org/img/wn/${response.data.list[3].weather[0].description}@2x.png`
-  //     );
-  //   document.querySelector("#forecast-five-high").innerHTML = `${Math.round(
-  //     response.data.list[4].main.temp_max
-  //   )} °C`;
-  //   document.querySelector("#forecast-five-low").innerHTML = `${Math.round(
-  //     response.data.list[4].main.temp_min
-  //   )} °C`;
-  //   document
-  //     .querySelector("#forecast-five-icon")
-  //     .setAttribute(
-  //       "src",
-  //       `http://openweathermap.org/img/wn/${response.data.list[4].weather[0].icon}@2x.png`
-  //     );
-  //   document
-  //   .querySelector("#forecast-five-icon")
-  //   .setAttribute(
-  //     "alt",
-  //     `http://openweathermap.org/img/wn/${response.data.list[4].weather[0].description}@2x.png`
-  //     );
-  celciusTemperatureForecastHigh = Math.round(
-    response.data.list[1].main.temp_max
-  );
-  celciusTemperatureForecastLow = Math.round(
-    response.data.list[1].main.temp_min
-  );
-  // celciusTemperatureTwoHigh = Math.round(response.data.list[1].main.temp_max);
-  // celciusTemperatureTwoLow = Math.round(response.data.list[1].main.temp_min);
-  // celciusTemperatureThreeHigh = Math.round(response.data.list[2].main.temp_max);
-  // celciusTemperatureThreeLow = Math.round(response.data.list[2].main.temp_min);
-  // celciusTemperatureFourHigh = Math.round(response.data.list[3].main.temp_max);
-  // celciusTemperatureFourLow = Math.round(response.data.list[3].main.temp_min);
-  // celciusTemperatureFiveHigh = Math.round(response.data.list[4].main.temp_max);
-  // celciusTemperatureFiveLow = Math.round(response.data.list[4].main.temp_min);
-}
+// function showForecast(response) {
 
-function showTemperature(response) {
+// celciusTemperatureTwoHigh = Math.round(response.data.list[1].main.temp_max);
+// celciusTemperatureTwoLow = Math.round(response.data.list[1].main.temp_min);
+// celciusTemperatureThreeHigh = Math.round(response.data.list[2].main.temp_max);
+// celciusTemperatureThreeLow = Math.round(response.data.list[2].main.temp_min);
+// celciusTemperatureFourHigh = Math.round(response.data.list[3].main.temp_max);
+// celciusTemperatureFourLow = Math.round(response.data.list[3].main.temp_min);
+// celciusTemperatureFiveHigh = Math.round(response.data.list[4].main.temp_max);
+// celciusTemperatureFiveLow = Math.round(response.data.list[4].main.temp_min);
+//}
+
+function displayTemperature(response) {
   document.querySelector("h1").innerHTML = response.data.name;
   document.querySelector("#current-temperature").innerHTML = Math.round(
     response.data.main.temp
@@ -586,16 +409,6 @@ let now = new Date();
 let dayElement = document.querySelector("#day");
 let dateElement = document.querySelector("#month-date-year");
 let timeElement = document.querySelector("#time");
-// let forecastOneDay = document.querySelector("#forecast-one-day");
-// let forecastOneDate = document.querySelector("#forecast-one-date");
-// let forecastTwoDay = document.querySelector("#forecast-two-day");
-// let forecastTwoDate = document.querySelector("#forecast-two-date");
-// let forecastThreeDay = document.querySelector("#forecast-three-day");
-// let forecastThreeDate = document.querySelector("#forecast-three-date");
-// let forecastFourDay = document.querySelector("#forecast-four-day");
-// let forecastFourDate = document.querySelector("#forecast-four-date");
-// let forecastFiveDay = document.querySelector("#forecast-five-day");
-// let forecastFiveDate = document.querySelector("#forecast-five-date");
 
 let button = document.querySelector("#current-city-button");
 button.addEventListener("click", getCurrentPosition);
@@ -627,17 +440,5 @@ celciusLink.addEventListener("click", switchUnitToCelcius);
 dayElement.innerHTML = formatWeekday(now);
 dateElement.innerHTML = formatDate(now);
 timeElement.innerHTML = formatTime(now);
-// forecastOneDay.innerHTML = formatForecastOneDay();
-// forecastOneDate.innerHTML = formatForecastOneDate();
-// forecastTwoDay.innerHTML = formatForecastTwoDay();
-// forecastTwoDate.innerHTML = formatForecastTwoDate();
-// forecastThreeDay.innerHTML = formatForecastThreeDay();
-// forecastThreeDate.innerHTML = formatForecastThreeDate();
-// forecastFourDay.innerHTML = formatForecastFourDay();
-// forecastFourDate.innerHTML = formatForecastFourDate();
-// forecastFiveDay.innerHTML = formatForecastFiveDay();
-// forecastFiveDate.innerHTML = formatForecastFiveDate();
 
 navigator.geolocation.getCurrentPosition(showPosition);
-
-displayForecast();
