@@ -4,8 +4,21 @@ function formatWeekday() {
   return dayIndex;
 }
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+
+  return weekdays[day];
+}
+
+function formatForecastDate(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let month = date.getMonth() + 1;
+  let day = date.getDate();
+  return `${month}/${day}`;
+}
+
 function displayForecast(response) {
-  console.log(response);
   let forecastElement = document.querySelector("#future-forecast");
   let forecastHTML = `<div class="row future-forecast">`;
   //celciusForecastHigh = Math.round(
@@ -50,62 +63,76 @@ function displayForecast(response) {
     new Date(response.data.daily[4].dt * 1000),
     new Date(response.data.daily[5].dt * 1000),
   ];
-  console.log(dateArray[0]);
 
-  let forecast = [
-    [
-      `${weekdays[forecastDayNumber[0]]}`,
-      `${dateArray[0].getMonth() + 1}/${dateArray[0].getDate()}`,
-      `${Math.round(response.data.daily[1].temp.max)} °C`,
-      `${Math.round(response.data.daily[1].temp.min)} °C`,
-      `http://openweathermap.org/img/wn/${response.data.daily[1].weather[0].icon}@2x.png`,
-    ],
-    [
-      `${weekdays[forecastDayNumber[1]]}`,
-      `${dateArray[1].getMonth() + 1}/${dateArray[1].getDate()}`,
-      `${Math.round(response.data.daily[2].temp.max)} °C`,
-      `${Math.round(response.data.daily[2].temp.min)} °C`,
-      `http://openweathermap.org/img/wn/${response.data.daily[2].weather[0].icon}@2x.png`,
-    ],
-    [
-      `${weekdays[forecastDayNumber[2]]}`,
-      `${dateArray[2].getMonth() + 1}/${dateArray[2].getDate()}`,
-      `${Math.round(response.data.daily[3].temp.max)} °C`,
-      `${Math.round(response.data.daily[3].temp.min)} °C`,
-      `http://openweathermap.org/img/wn/${response.data.daily[3].weather[0].icon}@2x.png`,
-    ],
-    [
-      `${weekdays[forecastDayNumber[3]]}`,
-      `${dateArray[3].getMonth() + 1}/${dateArray[3].getDate()}`,
-      `${Math.round(response.data.daily[4].temp.max)} °C`,
-      `${Math.round(response.data.daily[4].temp.min)} °C`,
-      `http://openweathermap.org/img/wn/${response.data.daily[4].weather[0].icon}@2x.png`,
-    ],
-    [
-      `${weekdays[forecastDayNumber[4]]}`,
-      `${dateArray[4].getMonth() + 1}/${dateArray[4].getDate()}`,
-      `${Math.round(response.data.daily[5].temp.max)} °C`,
-      `${Math.round(response.data.daily[5].temp.min)} °C`,
-      `http://openweathermap.org/img/wn/${response.data.daily[5].weather[0].icon}@2x.png`,
-    ],
-  ];
+  // let forecastDay =
 
-  forecast.forEach(function ([day, date, high, low, icon]) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="col">
+  let forecast = response.data.daily;
+  console.log(forecast);
+  // [
+  //   [
+  //     `${weekdays[forecastDayNumber[0]]}`,
+  //     `${dateArray[0].getMonth() + 1}/${dateArray[0].getDate()}`,
+  //     `${Math.round(response.data.daily[1].temp.max)} °C`,
+  //     `${Math.round(response.data.daily[1].temp.min)} °C`,
+  //     `http://openweathermap.org/img/wn/${response.data.daily[1].weather[0].icon}@2x.png`,
+  //   ],
+  //   [
+  //     `${weekdays[forecastDayNumber[1]]}`,
+  //     `${dateArray[1].getMonth() + 1}/${dateArray[1].getDate()}`,
+  //     `${Math.round(response.data.daily[2].temp.max)} °C`,
+  //     `${Math.round(response.data.daily[2].temp.min)} °C`,
+  //     `http://openweathermap.org/img/wn/${response.data.daily[2].weather[0].icon}@2x.png`,
+  //   ],
+  //   [
+  //     `${weekdays[forecastDayNumber[2]]}`,
+  //     `${dateArray[2].getMonth() + 1}/${dateArray[2].getDate()}`,
+  //     `${Math.round(response.data.daily[3].temp.max)} °C`,
+  //     `${Math.round(response.data.daily[3].temp.min)} °C`,
+  //     `http://openweathermap.org/img/wn/${response.data.daily[3].weather[0].icon}@2x.png`,
+  //   ],
+  //   [
+  //     `${weekdays[forecastDayNumber[3]]}`,
+  //     `${dateArray[3].getMonth() + 1}/${dateArray[3].getDate()}`,
+  //     `${Math.round(response.data.daily[4].temp.max)} °C`,
+  //     `${Math.round(response.data.daily[4].temp.min)} °C`,
+  //     `http://openweathermap.org/img/wn/${response.data.daily[4].weather[0].icon}@2x.png`,
+  //   ],
+  //   [
+  //     `${weekdays[forecastDayNumber[4]]}`,
+  //     `${dateArray[4].getMonth() + 1}/${dateArray[4].getDate()}`,
+  //     `${Math.round(response.data.daily[5].temp.max)} °C`,
+  //     `${Math.round(response.data.daily[5].temp.min)} °C`,
+  //     `http://openweathermap.org/img/wn/${response.data.daily[5].weather[0].icon}@2x.png`,
+  //   ],
+  // ];
+
+  forecast.forEach(function (forecastDay, index) {
+    if (index > 0 && index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="col">
             <div
               class="future-forecast-day border border-dark shadow rounded"
               >
-              <div class="day" id="forecast-day">${day}</div>
-              <div class="date" id="forecast-date">${date}</div>
+              <div class="day" id="forecast-day">${formatDay(
+                forecastDay.dt
+              )}</div>
+              <div class="date" id="forecast-date">${formatForecastDate(
+                forecastDay.dt
+              )}</div>
               <span class="high-low"
-              ><span class="high" id="forecast-high">${high}</span> /
-              <span class="low" id="forecast-low">${low}</span
+              ><span class="high" id="forecast-high">${Math.round(
+                forecastDay.temp.max
+              )}</span> /
+              <span class="low" id="forecast-low">${Math.round(
+                forecastDay.temp.min
+              )}</span
               ></span>
               <div class="forecast-emoji">
                 <img
-                  src="${icon}"
+                  src="http://openweathermap.org/img/wn/${
+                    forecastDay.weather[0].icon
+                  }@2x.png"
                   alt=""
                   class="forecast-icon"
                   id="forecast-icon"
@@ -113,8 +140,9 @@ function displayForecast(response) {
                   </div>
                   </div>`;
 
-    forecastHTML = forecastHTML + `</div>`;
-    forecastElement.innerHTML = forecastHTML;
+      forecastHTML = forecastHTML + `</div>`;
+      forecastElement.innerHTML = forecastHTML;
+    }
   });
 }
 
