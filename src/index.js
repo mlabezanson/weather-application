@@ -192,6 +192,12 @@ function displayTemperature(response) {
   getForecast(response.data.coord);
 }
 
+function restorePlaceholder(event) {
+  event.preventDefault;
+  let inputValue = document.querySelector("#city-search-input");
+  inputValue.value = "";
+}
+
 let weekdays = [
   "Sunday",
   "Monday",
@@ -212,6 +218,7 @@ button.addEventListener("click", getCurrentPosition);
 
 let citySearchForm = document.querySelector("#city-search-form");
 citySearchForm.addEventListener("submit", newCitySearch);
+citySearchForm.addEventListener("submit", restorePlaceholder);
 
 dayElement.innerHTML = formatWeekday(now);
 dateElement.innerHTML = formatDate(now);
