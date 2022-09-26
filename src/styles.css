@@ -60,6 +60,7 @@ h2 .active:hover {
 .day {
   font-family: "Poppins", sans-serif;
   font-weight: bold;
+  font-size: 14px;
 }
 
 .date,
@@ -89,6 +90,7 @@ h2 .active:hover {
   border: 1px solid #000;
   color: #2b4060;
   padding: 10px 15px 0 15px;
+  text-align: center;
 }
 
 .high {
@@ -98,7 +100,7 @@ h2 .active:hover {
 .high-low {
   color: #2b4060;
   font-family: "Poppins", sans-serif;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.5;
 }
 
