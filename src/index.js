@@ -44,48 +44,49 @@ function displayForecast(response) {
   }
 
   let dateArray = [
-    new Date(response.data.list[0].dt * 1000),
-    new Date(response.data.list[1].dt * 1000),
-    new Date(response.data.list[2].dt * 1000),
-    new Date(response.data.list[3].dt * 1000),
-    new Date(response.data.list[4].dt * 1000),
+    new Date(response.data.daily[1].dt * 1000),
+    new Date(response.data.daily[2].dt * 1000),
+    new Date(response.data.daily[3].dt * 1000),
+    new Date(response.data.daily[4].dt * 1000),
+    new Date(response.data.daily[5].dt * 1000),
   ];
+  console.log(dateArray[0]);
 
   let forecast = [
     [
       `${weekdays[forecastDayNumber[0]]}`,
       `${dateArray[0].getMonth() + 1}/${dateArray[0].getDate()}`,
-      `${Math.round(response.data.list[0].main.temp_max)} °C`,
-      `${Math.round(response.data.list[0].main.temp_min)} °C`,
-      `http://openweathermap.org/img/wn/${response.data.list[0].weather[0].icon}@2x.png`,
+      `${Math.round(response.data.daily[1].temp.max)} °C`,
+      `${Math.round(response.data.daily[1].temp.min)} °C`,
+      `http://openweathermap.org/img/wn/${response.data.daily[1].weather[0].icon}@2x.png`,
     ],
     [
       `${weekdays[forecastDayNumber[1]]}`,
       `${dateArray[1].getMonth() + 1}/${dateArray[1].getDate()}`,
-      `${Math.round(response.data.list[1].main.temp_max)} °C`,
-      `${Math.round(response.data.list[1].main.temp_min)} °C`,
-      `http://openweathermap.org/img/wn/${response.data.list[1].weather[0].icon}@2x.png`,
+      `${Math.round(response.data.daily[2].temp.max)} °C`,
+      `${Math.round(response.data.daily[2].temp.min)} °C`,
+      `http://openweathermap.org/img/wn/${response.data.daily[2].weather[0].icon}@2x.png`,
     ],
     [
       `${weekdays[forecastDayNumber[2]]}`,
       `${dateArray[2].getMonth() + 1}/${dateArray[2].getDate()}`,
-      `${Math.round(response.data.list[2].main.temp_max)} °C`,
-      `${Math.round(response.data.list[2].main.temp_min)} °C`,
-      `http://openweathermap.org/img/wn/${response.data.list[2].weather[0].icon}@2x.png`,
+      `${Math.round(response.data.daily[3].temp.max)} °C`,
+      `${Math.round(response.data.daily[3].temp.min)} °C`,
+      `http://openweathermap.org/img/wn/${response.data.daily[3].weather[0].icon}@2x.png`,
     ],
     [
       `${weekdays[forecastDayNumber[3]]}`,
       `${dateArray[3].getMonth() + 1}/${dateArray[3].getDate()}`,
-      `${Math.round(response.data.list[3].main.temp_max)} °C`,
-      `${Math.round(response.data.list[3].main.temp_min)} °C`,
-      `http://openweathermap.org/img/wn/${response.data.list[3].weather[0].icon}@2x.png`,
+      `${Math.round(response.data.daily[4].temp.max)} °C`,
+      `${Math.round(response.data.daily[4].temp.min)} °C`,
+      `http://openweathermap.org/img/wn/${response.data.daily[4].weather[0].icon}@2x.png`,
     ],
     [
       `${weekdays[forecastDayNumber[4]]}`,
       `${dateArray[4].getMonth() + 1}/${dateArray[4].getDate()}`,
-      `${Math.round(response.data.list[4].main.temp_max)} °C`,
-      `${Math.round(response.data.list[4].main.temp_min)} °C`,
-      `http://openweathermap.org/img/wn/${response.data.list[4].weather[0].icon}@2x.png`,
+      `${Math.round(response.data.daily[5].temp.max)} °C`,
+      `${Math.round(response.data.daily[5].temp.min)} °C`,
+      `http://openweathermap.org/img/wn/${response.data.daily[5].weather[0].icon}@2x.png`,
     ],
   ];
 
@@ -340,19 +341,21 @@ function newCitySearch(event) {
   let unit = "metric";
   let apiUrlWeather = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput.value}&units=${unit}`;
   axios.get(`${apiUrlWeather}&appid=${apiKey}`).then(displayTemperature);
-
-  let apiUrlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${cityInput.value}&units=${unit}&appid=${apiKey}`;
-  axios.get(`${apiUrlForecast}`).then(displayForecast);
 }
 
 function showPosition(position) {
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
   let unit = "metric";
-  let apiKey = "59f81d670602d254d31607e29d1fe6d5";
+  let apiKey = "6f578b96aa9505bcce148ac22cb85794";
   let apiUrlWeather = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=${unit}&appid=${apiKey}`;
   axios.get(`${apiUrlWeather}`).then(displayTemperature);
-  let apiUrlForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=${unit}&appid=${apiKey}`;
+}
+
+function getForecast(coordinates) {
+  let apiKey = "6f578b96aa9505bcce148ac22cb85794";
+  let apiUrlForecast = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&exclude={currently,hourly,minutely,alerts}&appid=${apiKey}&units=metric`;
+
   axios.get(`${apiUrlForecast}`).then(displayForecast);
 }
 
@@ -400,6 +403,8 @@ function displayTemperature(response) {
   celciusTemperatureFeelsLike = response.data.main.feels_like;
   celciusTemperatureHigh = response.data.main.temp_max;
   celciusTemperatureLow = response.data.main.temp_min;
+
+  getForecast(response.data.coord);
 }
 
 let weekdays = [
